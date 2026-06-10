@@ -1,0 +1,62 @@
+{
+  "eletronicos": {
+    "descricao": "Smartphones e tablets",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "informatica": {
+    "descricao": "Computadores e perifericos",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "maquinas": {
+    "descricao": "Maquinas e equipamentos industriais",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.05
+  },
+  "automoveis": {
+    "descricao": "Veiculos e pecas automotivas",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.25
+  },
+  "vestuario": {
+    "descricao": "Roupas e calcados",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "alimentos": {
+    "descricao": "Alimentos e bebidas",
+    "aliquota_ii": 0.1,
+    "aliquota_ipi": 0.0
+  },
+  "medicamentos": {
+    "descricao": "Medicamentos e insumos farmaceuticos",
+    "aliquota_ii": 0.0,
+    "aliquota_ipi": 0.0
+  },
+  "cosmeticos": {
+    "descricao": "Cosmeticos e perfumaria",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.3
+  },
+  "brinquedos": {
+    "descricao": "Brinquedos e jogos",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.1
+  },
+  "moveis": {
+    "descricao": "Moveis e decoracao",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.05
+  },
+  "instrumentos": {
+    "descricao": "Instrumentos musicais",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "opticos": {
+    "descricao": "Equipamentos opticos e fotograficos",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.1
+  }
+}
