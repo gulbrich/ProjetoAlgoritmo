@@ -1,16 +1,15 @@
-# This is a sample Python script.
+"""
+main.py
+-------
+Ponto de entrada do sistema de precificacao de produtos importados.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+Para trocar de interfaces, basta alterar o import abaixo:
+    from interfaces.cli import menu   <- terminal (atual)
+    from interfaces.gui import menu   <- tkinter (futuro)
+    from interfaces.web import menu   <- flask/streamlit (futuro)
+"""
 
+from interfaces.cli import menu
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    menu()

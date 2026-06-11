@@ -3,7 +3,7 @@ armazenamento.py
 ----------------
 Classe utilitaria para persistencia de dados em JSON.
 
-Define a interface abstrata BaseArmazenamento, que pode ser implementada
+Define a interfaces abstrata BaseArmazenamento, que pode ser implementada
 para qualquer tipo de banco de dados (JSON, SQLite, PostgreSQL, etc).
 
 O controller e os modulos de dados dependem apenas de BaseArmazenamento,
