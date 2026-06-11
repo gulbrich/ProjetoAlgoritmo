@@ -17,10 +17,10 @@ from modulos.controller  import (
 )
 from modulos.categorias  import listar_categorias
 from modulos.icms        import listar_ufs
-from interfaces.graficos    import (
-    qcomposicao_custo,
+from modulos.cotacao     import obter_cotacao
+from interfaces.graficos import (
+    composicao_custo,
     comparativo_produtos,
-    ponto_equilibrio,
     comparativo_estados,
 )
 
@@ -55,27 +55,74 @@ def _ler_int(mensagem: str, minimo: int = 1) -> int:
             print("  Entrada invalida. Digite um numero inteiro.")
 
 
-def _ler_uf(mensagem: str) -> str:
-    """Le uma UF valida do usuario."""
+def _ler_uf(mensagem: str, padrao: str = "SP") -> str:
+    """
+    Le uma UF valida do usuario.
+    Se vazio, usa o padrao informado e avisa o usuario.
+    """
     ufs = set(listar_ufs())
     while True:
         uf = input(mensagem).strip().upper()
+        if uf == "":
+            print(f"  Nenhum estado informado. Usando padrao: {padrao}.")
+            return padrao
         if uf in ufs:
             return uf
-        print(f"  UF invalida. Use a sigla de dois caracteres (ex: SP, MG, RJ).")
+        print("  UF invalida. Use a sigla de dois caracteres (ex: SP, MG, RJ).")
+
+
+def _ler_float_opcional(mensagem: str, padrao: float = 0.0) -> float:
+    """
+    Le um numero float do usuario.
+    Se vazio, retorna o valor padrao sem avisar (campo opcional).
+    """
+    while True:
+        entrada = input(mensagem).strip().replace(",", ".")
+        if entrada == "":
+            return padrao
+        try:
+            valor = float(entrada)
+            if valor < 0:
+                print("  Valor nao pode ser negativo.")
+                continue
+            return valor
+        except ValueError:
+            print("  Entrada invalida. Digite um numero ou deixe vazio.")
+
+
+def _ler_int_opcional(mensagem: str, padrao: int = 1) -> int:
+    """
+    Le um numero inteiro do usuario.
+    Se vazio, retorna o valor padrao sem avisar (campo opcional).
+    """
+    while True:
+        entrada = input(mensagem).strip()
+        if entrada == "":
+            return padrao
+        try:
+            valor = int(entrada)
+            if valor < 1:
+                print("  Valor deve ser maior ou igual a 1.")
+                continue
+            return valor
+        except ValueError:
+            print("  Entrada invalida. Digite um numero inteiro ou deixe vazio.")
 
 
 def _ler_categoria(mensagem: str) -> str:
-    """Exibe as categorias disponiveis e le uma escolha valida."""
+    """Exibe as categorias disponiveis e le uma escolha por numero."""
     categorias = listar_categorias()
     print("\n  Categorias disponiveis:")
     for i, (chave, descricao) in enumerate(categorias, start=1):
-        print(f"    {i:>2}. {chave:<15} - {descricao}")
+        print(f"    {i:>2}. {descricao}")
     while True:
-        entrada = input(mensagem).strip().lower()
-        if any(entrada == chave for chave, _ in categorias):
-            return entrada
-        print("  Categoria invalida. Digite exatamente o nome da categoria.")
+        try:
+            numero = int(input(mensagem).strip())
+            if 1 <= numero <= len(categorias):
+                return categorias[numero - 1][0]
+            print(f"  Numero invalido. Digite entre 1 e {len(categorias)}.")
+        except ValueError:
+            print(f"  Entrada invalida. Digite um numero entre 1 e {len(categorias)}.")
 
 
 def _ler_confirmacao(mensagem: str) -> bool:
@@ -84,9 +131,29 @@ def _ler_confirmacao(mensagem: str) -> bool:
         resposta = input(mensagem).strip().lower()
         if resposta in ("s", "sim"):
             return True
-        if resposta in ("n", "nao", "não"):
+        if resposta in ("n", "nao", "nao"):
             return False
         print("  Responda com 's' ou 'n'.")
+
+
+def _obter_cotacao_com_fallback() -> tuple:
+    """
+    Tenta buscar a cotacao do dolar via API.
+    Se falhar, solicita a cotacao manualmente ao usuario.
+
+    Retorna:
+        tuple: (cotacao: float, fonte: str)
+    """
+    print("\n  Buscando cotacao do dolar...")
+    try:
+        cotacao = obter_cotacao()
+        print(f"  Cotacao obtida via API: R$ {cotacao:.4f}")
+        return cotacao, "API"
+    except (ConnectionError, ValueError) as e:
+        print(f"  Nao foi possivel obter a cotacao automatica: {e}")
+        print("  Informe a cotacao manualmente.")
+        cotacao = _ler_float("  Cotacao do dolar (R$/USD): R$ ", minimo=0.01)
+        return cotacao, "Manual"
 
 
 # ---------------------------------------------------------------------------
@@ -106,31 +173,31 @@ def _exibir_resultado(resultado: dict) -> None:
     _separador("=")
     print(f"  RESULTADO DO CALCULO")
     _separador("=")
-    print(f"  Produto         : {ent['nome']}")
-    print(f"  Categoria       : {resultado['categoria']['descricao']}")
+    print(f"  Produto          : {ent['nome']}")
+    print(f"  Categoria        : {resultado['categoria']['descricao']}")
     print(f"  Origem -> Destino: {ent['uf_origem']} -> {ent['uf_destino']}")
-    print(f"  Cotacao do dolar: R$ {resultado['cotacao']:.4f}  ({resultado['fonte_cotacao']})")
+    print(f"  Cotacao do dolar : R$ {resultado['cotacao']:.4f}  ({resultado['fonte_cotacao']})")
     _separador()
     print(f"  COMPOSICAO DO CUSTO")
     _separador()
-    print(f"  Valor aduaneiro : R$ {imp['valor_aduaneiro']:>12,.2f}")
-    print(f"  II              : R$ {imp['ii']:>12,.2f}  ({resultado['categoria']['aliquota_ii']*100:.0f}%)")
-    print(f"  IPI             : R$ {imp['ipi']:>12,.2f}  ({resultado['categoria']['aliquota_ipi']*100:.0f}%)")
-    print(f"  PIS             : R$ {imp['pis']:>12,.2f}  (2,10%)")
-    print(f"  COFINS          : R$ {imp['cofins']:>12,.2f}  (9,65%)")
-    print(f"  ICMS            : R$ {imp['icms']:>12,.2f}  ({resultado['aliquota_icms']*100:.0f}%)")
-    print(f"  Despesas        : R$ {imp['despesas']:>12,.2f}")
+    print(f"  Valor aduaneiro  : R$ {imp['valor_aduaneiro']:>12,.2f}")
+    print(f"  II               : R$ {imp['ii']:>12,.2f}  ({resultado['categoria']['aliquota_ii']*100:.0f}%)")
+    print(f"  IPI              : R$ {imp['ipi']:>12,.2f}  ({resultado['categoria']['aliquota_ipi']*100:.0f}%)")
+    print(f"  PIS              : R$ {imp['pis']:>12,.2f}  (2,10%)")
+    print(f"  COFINS           : R$ {imp['cofins']:>12,.2f}  (9,65%)")
+    print(f"  ICMS             : R$ {imp['icms']:>12,.2f}  ({resultado['aliquota_icms']*100:.0f}%)")
+    print(f"  Despesas         : R$ {imp['despesas']:>12,.2f}")
     _separador()
-    print(f"  Total impostos  : R$ {imp['total_impostos']:>12,.2f}")
-    print(f"  Custo unitario  : R$ {prec['custo_unitario']:>12,.2f}")
+    print(f"  Total impostos   : R$ {imp['total_impostos']:>12,.2f}")
+    print(f"  Custo unitario   : R$ {prec['custo_unitario']:>12,.2f}")
     _separador()
     print(f"  PRECIFICACAO  ({ent['margem']*100:.0f}% de margem)")
     _separador()
-    print(f"  Preco de venda  : R$ {prec['preco_venda']:>12,.2f}")
-    print(f"  Lucro unitario  : R$ {prec['lucro_unitario']:>12,.2f}")
-    print(f"  Quantidade      : {prec['quantidade']:>15} un.")
-    print(f"  Receita total   : R$ {prec['receita_total']:>12,.2f}")
-    print(f"  Lucro do lote   : R$ {prec['lucro_total_lote']:>12,.2f}")
+    print(f"  Preco de venda   : R$ {prec['preco_venda']:>12,.2f}")
+    print(f"  Lucro unitario   : R$ {prec['lucro_unitario']:>12,.2f}")
+    print(f"  Quantidade       : {prec['quantidade']:>15} un.")
+    print(f"  Receita total    : R$ {prec['receita_total']:>12,.2f}")
+    print(f"  Lucro do lote    : R$ {prec['lucro_total_lote']:>12,.2f}")
     _separador("=")
 
 
@@ -152,6 +219,22 @@ def _exibir_lista_produtos(produtos: list) -> None:
     _separador("=")
 
 
+def _produto_para_resultado(produto: dict) -> dict:
+    """
+    Reconstroi o dicionario de resultado a partir de um produto cadastrado,
+    no formato esperado por _exibir_resultado() e pelas funcoes de graficos.
+    """
+    return {
+        "entrada"      : produto["entrada"],
+        "cotacao"      : produto["cotacao"],
+        "fonte_cotacao": produto["fonte_cotacao"],
+        "categoria"    : produto["entrada"],
+        "aliquota_icms": produto["impostos"]["icms"] / produto["impostos"]["valor_aduaneiro"],
+        "impostos"     : produto["impostos"],
+        "precificacao" : produto["precificacao"],
+    }
+
+
 # ---------------------------------------------------------------------------
 # Telas
 # ---------------------------------------------------------------------------
@@ -161,23 +244,21 @@ def tela_calcular_produto() -> None:
     print("\n  NOVO CALCULO DE PRECIFICACAO")
     _separador()
 
-    dados = {
-        "nome"      : input("  Nome do produto   : ").strip(),
-        "categoria" : _ler_categoria("  Categoria         : "),
-        "uf_origem" : _ler_uf("  UF de origem      : "),
-        "uf_destino": _ler_uf("  UF de destino     : "),
-        "valor_usd" : _ler_float("  Valor em USD      : $ ", minimo=0.01),
-        "frete"     : _ler_float("  Frete (R$)        : R$ ", minimo=0),
-        "despesas"  : _ler_float("  Despesas (R$)     : R$ ", minimo=0),
-        "quantidade": _ler_int("  Quantidade (un.)  : ", minimo=1),
-        "margem"    : _ler_float("  Margem de lucro % : ", minimo=1) / 100,
-    }
+    cotacao, fonte_cotacao = _obter_cotacao_com_fallback()
 
-    usar_cotacao_manual = _ler_confirmacao(
-        "\n  Deseja informar a cotacao do dolar manualmente? (s/n): "
-    )
-    if usar_cotacao_manual:
-        dados["cotacao"] = _ler_float("  Cotacao (R$/USD)  : R$ ", minimo=0.01)
+    dados = {
+        "nome"         : input("\n  Nome do produto   : ").strip(),
+        "categoria"    : _ler_categoria("  Categoria (numero): "),
+        "uf_origem"    : _ler_uf("  UF de origem      [Enter=SP]: "),
+        "uf_destino"   : _ler_uf("  UF de destino     [Enter=SP]: "),
+        "valor_usd"    : _ler_float("  Valor em USD      : $ ", minimo=0.01),
+        "frete"        : _ler_float_opcional("  Frete (R$)        [Enter=0]: R$ "),
+        "despesas"     : _ler_float_opcional("  Despesas (R$)     [Enter=0]: R$ "),
+        "quantidade"   : _ler_int_opcional("  Quantidade (un.)  [Enter=1]: "),
+        "margem"       : _ler_float("  Margem de lucro % : ", minimo=1) / 100,
+        "cotacao"      : cotacao,
+        "fonte_cotacao": fonte_cotacao,
+    }
 
     try:
         resultado = calcular_produto(dados)
@@ -190,7 +271,7 @@ def tela_calcular_produto() -> None:
         if _ler_confirmacao("\n  Deseja ver o grafico de composicao do custo? (s/n): "):
             composicao_custo(resultado)
 
-    except (ValueError, TypeError, KeyError, ConnectionError) as e:
+    except (ValueError, TypeError, KeyError) as e:
         print(f"\n  Erro ao calcular: {e}")
 
 
@@ -212,15 +293,7 @@ def tela_buscar_produto() -> None:
         if opcao == "1":
             id_produto = input("  ID do produto: ").strip()
             produto = consultar_por_id(id_produto)
-            _exibir_resultado({
-                "entrada"      : produto["entrada"],
-                "cotacao"      : produto["cotacao"],
-                "fonte_cotacao": produto["fonte_cotacao"],
-                "categoria"    : produto["entrada"],
-                "aliquota_icms": produto["impostos"]["icms"] / produto["impostos"]["valor_aduaneiro"],
-                "impostos"     : produto["impostos"],
-                "precificacao" : produto["precificacao"],
-            })
+            _exibir_resultado(_produto_para_resultado(produto))
         elif opcao == "2":
             nome = input("  Nome (ou parte): ").strip()
             _exibir_lista_produtos(consultar_por_nome(nome))
@@ -279,16 +352,7 @@ def tela_graficos() -> None:
             id_produto = input("\n  ID do produto: ").strip()
             try:
                 produto = consultar_por_id(id_produto)
-                resultado = {
-                    "entrada"      : produto["entrada"],
-                    "cotacao"      : produto["cotacao"],
-                    "fonte_cotacao": produto["fonte_cotacao"],
-                    "categoria"    : produto["entrada"],
-                    "aliquota_icms": produto["impostos"]["icms"] / produto["impostos"]["valor_aduaneiro"],
-                    "impostos"     : produto["impostos"],
-                    "precificacao" : produto["precificacao"],
-                }
-                composicao_custo(resultado)
+                composicao_custo(_produto_para_resultado(produto))
             except ValueError as e:
                 print(f"\n  {e}")
 
@@ -301,18 +365,7 @@ def tela_graficos() -> None:
             entrada = input("  IDs: ").strip()
             ids = [i.strip() for i in entrada.split(",")]
             try:
-                resultados = []
-                for id_p in ids:
-                    p = consultar_por_id(id_p)
-                    resultados.append({
-                        "entrada"      : p["entrada"],
-                        "cotacao"      : p["cotacao"],
-                        "fonte_cotacao": p["fonte_cotacao"],
-                        "categoria"    : p["entrada"],
-                        "aliquota_icms": p["impostos"]["icms"] / p["impostos"]["valor_aduaneiro"],
-                        "impostos"     : p["impostos"],
-                        "precificacao" : p["precificacao"],
-                    })
+                resultados = [_produto_para_resultado(consultar_por_id(i)) for i in ids]
                 comparativo_produtos(resultados)
             except ValueError as e:
                 print(f"\n  {e}")
@@ -322,38 +375,10 @@ def tela_graficos() -> None:
             id_produto = input("\n  ID do produto: ").strip()
             try:
                 produto = consultar_por_id(id_produto)
-                custo_fixo = _ler_float("  Custo fixo total do periodo (R$): R$ ", minimo=0.01)
-                resultado = {
-                    "entrada"      : produto["entrada"],
-                    "cotacao"      : produto["cotacao"],
-                    "fonte_cotacao": produto["fonte_cotacao"],
-                    "categoria"    : produto["entrada"],
-                    "aliquota_icms": produto["impostos"]["icms"] / produto["impostos"]["valor_aduaneiro"],
-                    "impostos"     : produto["impostos"],
-                    "precificacao" : produto["precificacao"],
-                }
-                ponto_equilibrio(resultado, custo_fixo)
-            except ValueError as e:
-                print(f"\n  {e}")
-
-        elif opcao == "4":
-            _exibir_lista_produtos(produtos)
-            id_produto = input("\n  ID do produto: ").strip()
-            try:
-                produto = consultar_por_id(id_produto)
-                resultado_base = {
-                    "entrada"      : produto["entrada"],
-                    "cotacao"      : produto["cotacao"],
-                    "fonte_cotacao": produto["fonte_cotacao"],
-                    "categoria"    : produto["entrada"],
-                    "aliquota_icms": produto["impostos"]["icms"] / produto["impostos"]["valor_aduaneiro"],
-                    "impostos"     : produto["impostos"],
-                    "precificacao" : produto["precificacao"],
-                }
                 print("  Informe as UFs a comparar (separadas por virgula, ex: SP,MG,BA,RS):")
                 entrada = input("  UFs: ").strip().upper()
                 estados = [uf.strip() for uf in entrada.split(",")]
-                comparativo_estados(resultado_base, estados, calcular_produto)
+                comparativo_estados(_produto_para_resultado(produto), estados, calcular_produto)
             except ValueError as e:
                 print(f"\n  {e}")
 

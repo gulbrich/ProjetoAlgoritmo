@@ -44,19 +44,27 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
     """
     Gera grafico de pizza com a composicao do custo do produto.
 
-    Exibe o valor aduaneiro e cada imposto como fatias individuais,
-    permitindo visualizar o peso de cada tributo no custo final.
+    Exibe o valor do produto, frete e cada imposto como fatias individuais,
+    permitindo visualizar o peso de cada componente no custo final.
+
+    O valor aduaneiro (VA = produto + frete) e desmembrado para que
+    o usuario veja claramente quanto pagou pelo produto em si.
 
     Parametros:
         resultado : dicionario retornado por controller.calcular_produto()
         caminho   : se informado, salva o grafico neste caminho (.png, .pdf)
                     se None, exibe na tela
     """
-    imp  = resultado["impostos"]
-    nome = resultado["entrada"]["nome"]
+    imp     = resultado["impostos"]
+    entrada = resultado["entrada"]
+    nome    = entrada["nome"]
+
+    valor_produto = float(entrada["valor_usd"]) * float(entrada["cotacao"])
+    frete         = float(entrada["frete"])
 
     labels = [
-        "Valor Aduaneiro",
+        "Valor do Produto",
+        "Frete Internacional",
         f"II ({resultado['categoria']['aliquota_ii']*100:.0f}%)",
         f"IPI ({resultado['categoria']['aliquota_ipi']*100:.0f}%)",
         "PIS (2,10%)",
@@ -65,7 +73,8 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
         "Despesas Aduaneiras",
     ]
     valores = [
-        imp["valor_aduaneiro"],
+        valor_produto,
+        frete,
         imp["ii"],
         imp["ipi"],
         imp["pis"],
@@ -78,8 +87,8 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
     pares = [(l, v) for l, v in zip(labels, valores) if v > 0]
     labels, valores = zip(*pares)
 
-    cores = ["#4C72B0", "#DD8452", "#55A868", "#C44E52",
-             "#8172B2", "#937860", "#A8C7E8"][:len(valores)]
+    cores = ["#2E75B6", "#A8C7E8", "#DD8452", "#55A868", "#C44E52",
+             "#8172B2", "#937860", "#B5CFE8"][:len(valores)]
 
     fig, ax = plt.subplots(figsize=(8, 6))
     wedges, texts, autotexts = ax.pie(
@@ -115,14 +124,15 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
 
 def comparativo_produtos(resultados: list, caminho: str = None) -> None:
     """
-    Gera grafico de barras empilhadas comparando multiplos produtos.
+    Gera grafico de barras agrupadas comparando multiplos produtos.
 
-    Cada barra representa um produto, com segmentos para valor aduaneiro,
-    total de impostos e margem de lucro.
+    Exibe, para cada produto, o percentual de impostos sobre o custo total
+    e a margem de lucro sobre o preco de venda. Usar percentuais em vez de
+    valores absolutos permite comparar produtos de escalas de preco muito
+    diferentes de forma significativa.
 
     Parametros:
         resultados : lista de dicionarios retornados por calcular_produto()
-                     cada dict deve conter a chave 'entrada'['nome']
         caminho    : caminho para salvar o grafico (opcional)
 
     Lanca:
@@ -131,93 +141,50 @@ def comparativo_produtos(resultados: list, caminho: str = None) -> None:
     if not resultados:
         raise ValueError("A lista de resultados nao pode estar vazia.")
 
-    nomes        = [r["entrada"]["nome"][:20]         for r in resultados]
-    aduaneiros   = [r["impostos"]["valor_aduaneiro"]  for r in resultados]
-    impostos     = [r["impostos"]["total_impostos"]   for r in resultados]
-    despesas     = [r["impostos"]["despesas"]         for r in resultados]
-    margens      = [r["precificacao"]["lucro_unitario"] for r in resultados]
+    nomes = [r["entrada"]["nome"][:20] for r in resultados]
 
-    x = range(len(nomes))
-    largura = 0.5
+    # % de impostos sobre o custo total
+    pct_impostos = [
+        r["impostos"]["total_impostos"] / r["impostos"]["custo_total"] * 100
+        for r in resultados
+    ]
+    # % de margem sobre o preco de venda
+    pct_margem = [
+        r["precificacao"]["lucro_unitario"] / r["precificacao"]["preco_venda"] * 100
+        for r in resultados
+    ]
+    # % de despesas sobre o custo total
+    pct_despesas = [
+        r["impostos"]["despesas"] / r["impostos"]["custo_total"] * 100
+        for r in resultados
+    ]
 
-    fig, ax = plt.subplots(figsize=(max(6, len(nomes) * 1.5), 6))
+    x       = list(range(len(nomes)))
+    largura = 0.25
 
-    b1 = ax.bar(x, aduaneiros, largura, label="Valor Aduaneiro", color="#4C72B0")
-    b2 = ax.bar(x, impostos,   largura, bottom=aduaneiros,
-                label="Total Impostos", color="#DD8452")
-    b3 = ax.bar(x, despesas,   largura,
-                bottom=[a + i for a, i in zip(aduaneiros, impostos)],
-                label="Despesas", color="#C44E52")
-    b4 = ax.bar(x, margens,    largura,
-                bottom=[a + i + d for a, i, d in zip(aduaneiros, impostos, despesas)],
-                label="Margem de Lucro", color="#55A868")
+    fig, ax = plt.subplots(figsize=(max(6, len(nomes) * 1.8), 6))
 
-    ax.set_xticks(list(x))
+    pos_imp  = [xi - largura for xi in x]
+    pos_desp = [xi           for xi in x]
+    pos_mar  = [xi + largura for xi in x]
+
+    bars_imp  = ax.bar(pos_imp,  pct_impostos, largura, label="Impostos / Custo Total (%)",   color="#DD8452")
+    bars_desp = ax.bar(pos_desp, pct_despesas, largura, label="Despesas / Custo Total (%)",   color="#C44E52")
+    bars_mar  = ax.bar(pos_mar,  pct_margem,   largura, label="Margem / Preco de Venda (%)",  color="#55A868")
+
+    for bars in [bars_imp, bars_desp, bars_mar]:
+        for bar in bars:
+            h = bar.get_height()
+            if h > 0:
+                ax.text(bar.get_x() + bar.get_width() / 2, h + 0.4,
+                        f"{h:.1f}%", ha="center", va="bottom", fontsize=8)
+
+    ax.set_xticks(x)
     ax.set_xticklabels(nomes, rotation=20, ha="right", fontsize=9)
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(_formatar_reais))
-    ax.set_ylabel("Valor (R$)")
-    ax.set_title("Comparativo de Produtos — Composicao do Preco de Venda", fontsize=12)
-    ax.legend(loc="upper left", fontsize=9)
-
-    _salvar_ou_exibir(caminho)
-
-
-def ponto_equilibrio(resultado: dict, custo_fixo: float,
-                     caminho: str = None) -> None:
-    """
-    Gera grafico de ponto de equilibrio para o produto.
-
-    Plota as curvas de receita total e custo total em funcao da
-    quantidade vendida, destacando o ponto de equilibrio.
-
-    Parametros:
-        resultado  : dicionario retornado por calcular_produto()
-        custo_fixo : custo fixo total do periodo em reais
-        caminho    : caminho para salvar o grafico (opcional)
-
-    Lanca:
-        ValueError: se o preco de venda for menor ou igual ao custo unitario
-    """
-    prec         = resultado["precificacao"]
-    nome         = resultado["entrada"]["nome"]
-    custo_unit   = prec["custo_unitario"]
-    preco_venda  = prec["preco_venda"]
-
-    margem_contrib = preco_venda - custo_unit
-    if margem_contrib <= 0:
-        raise ValueError(
-            "Preco de venda menor ou igual ao custo unitario. "
-            "Ponto de equilibrio inexistente."
-        )
-
-    pe = custo_fixo / margem_contrib
-    qtd_max = int(pe * 2) + 1
-
-    quantidades  = list(range(0, qtd_max + 1))
-    custo_total  = [custo_fixo + custo_unit * q for q in quantidades]
-    receita      = [preco_venda * q             for q in quantidades]
-
-    fig, ax = plt.subplots(figsize=(8, 5))
-
-    ax.plot(quantidades, receita,     label="Receita Total",  color="#55A868", linewidth=2)
-    ax.plot(quantidades, custo_total, label="Custo Total",    color="#C44E52", linewidth=2)
-    ax.axhline(custo_fixo, linestyle="--", color="#888", linewidth=1, label="Custo Fixo")
-    ax.axvline(pe, linestyle=":",    color="#4C72B0", linewidth=1.5,
-               label=f"PE = {pe:.1f} un.")
-
-    ax.annotate(
-        f"PE\n{pe:.1f} un.",
-        xy=(pe, custo_fixo + margem_contrib * pe),
-        xytext=(pe * 1.08, custo_fixo * 1.2),
-        arrowprops=dict(arrowstyle="->", color="#4C72B0"),
-        fontsize=9, color="#4C72B0",
-    )
-
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(_formatar_reais))
-    ax.set_xlabel("Quantidade (unidades)")
-    ax.set_ylabel("Valor (R$)")
-    ax.set_title(f"Ponto de Equilibrio — {nome}", fontsize=12)
-    ax.legend(fontsize=9)
+    ax.set_ylabel("Percentual (%)")
+    ax.set_ylim(0, max(max(pct_impostos), max(pct_margem)) * 1.18)
+    ax.set_title("Comparativo de Produtos — Carga Tributaria e Margem (%)", fontsize=12)
+    ax.legend(loc="upper right", fontsize=9)
 
     _salvar_ou_exibir(caminho)
 
@@ -257,19 +224,29 @@ def comparativo_estados(resultado_base: dict, estados: list,
              for uf in estados]
     bars = ax.bar(estados, precos, color=cores)
 
-    for bar, icms in zip(bars, icms_vals):
+    preco_base = precos[estados.index(entrada_base["uf_destino"])] if entrada_base["uf_destino"] in estados else precos[0]
+
+    for bar, preco, uf in zip(bars, precos, estados):
+        diff = preco - preco_base
+        if uf == entrada_base["uf_destino"]:
+            rotulo = "base"
+        elif diff >= 0:
+            rotulo = f"+R${diff:,.0f}"
+        else:
+            rotulo = f"-R${abs(diff):,.0f}"
         ax.text(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height() + max(precos) * 0.01,
-            f"ICMS\nR${icms:,.0f}",
+            rotulo,
             ha="center", va="bottom", fontsize=8,
+            color="#C44E52" if diff > 0 else "#55A868" if diff < 0 else "#444444",
         )
 
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(_formatar_reais))
     ax.set_ylabel("Preco de Venda (R$)")
     ax.set_title(
         f"Preco de Venda por Estado de Destino — {entrada_base['nome']}\n"
-        f"(destino atual destacado em vermelho)",
+        f"(valores mostram diferenca em relacao ao estado base)",
         fontsize=11,
     )
 
