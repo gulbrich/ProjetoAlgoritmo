@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4f434bc-e852-454e-ad88-559338ecdb47" name="Changes" comment="primeira versão quase funcional">
-      <changelist_data name="Guilherme Ulbrich" email="ngenesis@gmail.com" automatic="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/janelas/calcular.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/janelas/produtos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interfaces/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interfaces/graficos.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/graficos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="25" />
+    <option name="cachedIndexableFilesCount" value="31" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -33,6 +28,11 @@
       <list>
         <option value="Guilherme Ulbrich &lt;ngenesis@gmail.com&gt;" />
       </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -57,61 +57,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000043880153402" />
-      <entry key="S2" value="1.0457685374162486" />
-      <entry key="S5" value="1.2912237660053203" />
-      <entry key="S10" value="1.5396515227490055" />
-      <entry key="S30" value="1.8141500782494333" />
-      <entry key="S60" value="1.9023026533538696" />
-      <entry key="M2" value="1.9498961276654776" />
-      <entry key="M5" value="1.9796488813376683" />
-      <entry key="M10" value="1.9897721360685339" />
-      <entry key="M15" value="1.993169747647796" />
-      <entry key="M30" value="1.9965790222796163" />
-      <entry key="H1" value="1.9982880457461245" />
-      <entry key="H2" value="1.9991436562107197" />
-      <entry key="H4" value="1.9995717364005043" />
-      <entry key="D1" value="1.9999286099932974" />
-      <entry key="W1" value="1.9999898011155675" />
+      <entry key="MS100" value="2.1255697623934893" />
+      <entry key="MS500" value="3.8749290608128826" />
+      <entry key="S2" value="4.669084776580239" />
+      <entry key="S5" value="4.863039523883986" />
+      <entry key="S10" value="4.9307280119204595" />
+      <entry key="S30" value="4.976730909098664" />
+      <entry key="S60" value="4.988342993908656" />
+      <entry key="M2" value="4.994165869939341" />
+      <entry key="M5" value="4.997664995971724" />
+      <entry key="M10" value="4.998832272749752" />
+      <entry key="M15" value="4.999221930599262" />
+      <entry key="M30" value="5.000575790822439" />
+      <entry key="H1" value="5.043738995583027" />
+      <entry key="H2" value="5.296326828013017" />
+      <entry key="H4" value="5.76991775347784" />
+      <entry key="D1" value="6.705826645803893" />
+      <entry key="W1" value="6.955056462432917" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="9.965853238509607E-14" />
-      <entry key="MS500" value="0.0025101686278698695" />
-      <entry key="S2" value="0.22383382918464786" />
-      <entry key="S5" value="0.5495032808384379" />
-      <entry key="S10" value="0.7412848850735041" />
-      <entry key="S30" value="0.9050273732137413" />
-      <entry key="S60" value="0.9513292664549649" />
-      <entry key="M2" value="0.9753610954179814" />
-      <entry key="M5" value="0.9900706161929884" />
-      <entry key="M10" value="0.995022922446005" />
-      <entry key="M15" value="0.9966791898244961" />
-      <entry key="M30" value="0.9983382141461359" />
-      <entry key="H1" value="0.9991687615944245" />
-      <entry key="H2" value="0.9995842943916359" />
-      <entry key="H4" value="0.9997921255899327" />
-      <entry key="D1" value="0.99996535126379" />
-      <entry key="W1" value="0.9999950501070377" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="1.0312476863310484E-199" />
+      <entry key="S60" value="3.2113045422865916E-100" />
+      <entry key="M2" value="1.7920113119862242E-50" />
+      <entry key="M5" value="1.2628050172511882E-20" />
+      <entry key="M10" value="1.1237459754104524E-10" />
+      <entry key="M15" value="2.328692259362006E-7" />
+      <entry key="M30" value="4.82565255624771E-4" />
+      <entry key="H1" value="0.021967367972171147" />
+      <entry key="H2" value="0.14821392637728464" />
+      <entry key="H4" value="0.3849856184031873" />
+      <entry key="D1" value="0.8529182707001483" />
+      <entry key="W1" value="0.9775289567475619" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.5140569133280333" />
-      <entry key="MS500" value="0.8757354123366451" />
-      <entry key="S2" value="1.1434586793929744" />
-      <entry key="S5" value="1.7135298269122938" />
-      <entry key="S10" value="2.190232881358481" />
-      <entry key="S30" value="2.6804172439263687" />
-      <entry key="S60" value="2.8329803906277875" />
-      <entry key="M2" value="2.9145958388720805" />
-      <entry key="M5" value="2.965372011035494" />
-      <entry key="M10" value="2.982607289665489" />
-      <entry key="M15" value="2.9883872928600006" />
-      <entry key="M30" value="2.9941848442680605" />
-      <entry key="H1" value="2.9970902180793946" />
-      <entry key="H2" value="2.998544557586133" />
-      <entry key="H4" value="2.999272140874648" />
-      <entry key="D1" value="2.999878670985766" />
-      <entry key="W1" value="2.9999826668143954" />
+      <entry key="MS100" value="2.0154198502744145" />
+      <entry key="MS500" value="3.8302724380175808" />
+      <entry key="S2" value="4.655286267487469" />
+      <entry key="S5" value="4.857261412051048" />
+      <entry key="S10" value="4.927793759691617" />
+      <entry key="S30" value="4.9757425811700084" />
+      <entry key="S60" value="4.987847536750991" />
+      <entry key="M2" value="4.993917817101285" />
+      <entry key="M5" value="4.9975656968909785" />
+      <entry key="M10" value="4.998782610320297" />
+      <entry key="M15" value="4.999189051876007" />
+      <entry key="M30" value="5.0010414449921194" />
+      <entry key="H1" value="5.065690024957827" />
+      <entry key="H2" value="5.444509422148481" />
+      <entry key="H4" value="6.154865983436787" />
+      <entry key="D1" value="7.558731529731928" />
+      <entry key="W1" value="7.932583234566344" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -123,32 +123,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.calcular.executor&quot;: &quot;Run&quot;,
-    &quot;Python.graficos.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.produtos.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/gulbrich/PycharmProjects/ProjetoAlgoritmo/dados&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.calcular.executor": "Run",
+    "Python.graficos.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.produtos.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/gulbrich/PycharmProjects/ProjetoAlgoritmo/dados",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/dados" />
@@ -259,7 +259,7 @@
       <workItem from="1780409024042" duration="1608000" />
       <workItem from="1780444201559" duration="595000" />
       <workItem from="1781056330738" duration="7271000" />
-      <workItem from="1781077215086" duration="19595000" />
+      <workItem from="1781077215086" duration="25768000" />
     </task>
     <task id="LOCAL-00001" summary="primeira versao">
       <option name="closed" value="true" />
@@ -309,7 +309,23 @@
       <option name="project" value="LOCAL" />
       <updated>1781140706380</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="primeira versão quase funcional">
+      <option name="closed" value="true" />
+      <created>1781195550076</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1781195550076</updated>
+    </task>
+    <task id="LOCAL-00008" summary="primeira versão quase funcional">
+      <option name="closed" value="true" />
+      <created>1781195644613</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1781195644613</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +366,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$produtos.coverage" NAME="produtos Coverage Results" MODIFIED="1781175754011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interfaces/janelas" />
-    <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$main.coverage" NAME="main Coverage Results" MODIFIED="1781185124033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$main.coverage" NAME="main Coverage Results" MODIFIED="1781215926823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$graficos.coverage" NAME="graficos Coverage Results" MODIFIED="1781124159603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interfaces" />
     <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$calcular.coverage" NAME="calcular Coverage Results" MODIFIED="1781178542401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interfaces/janelas" />
   </component>
