@@ -15,10 +15,10 @@ from modulos.controller  import (
     consultar_por_nome,
     excluir_produto,
 )
-from modulos.categorias  import listar_categorias
+from modulos.ncm         import buscar_ncm_local, obter_aliquotas_ncm
 from modulos.icms        import listar_ufs
 from modulos.cotacao     import obter_cotacao
-from interfaces.graficos import (
+from modulos.graficos import (
     composicao_custo,
     comparativo_produtos,
     comparativo_estados,
@@ -109,20 +109,31 @@ def _ler_int_opcional(mensagem: str, padrao: int = 1) -> int:
             print("  Entrada invalida. Digite um numero inteiro ou deixe vazio.")
 
 
-def _ler_categoria(mensagem: str) -> str:
-    """Exibe as categorias disponiveis e le uma escolha por numero."""
-    categorias = listar_categorias()
-    print("\n  Categorias disponiveis:")
-    for i, (chave, descricao) in enumerate(categorias, start=1):
-        print(f"    {i:>2}. {descricao}")
+def _ler_ncm() -> dict:
+    """Busca e seleciona um NCM pelo termo digitado."""
     while True:
-        try:
-            numero = int(input(mensagem).strip())
-            if 1 <= numero <= len(categorias):
-                return categorias[numero - 1][0]
-            print(f"  Numero invalido. Digite entre 1 e {len(categorias)}.")
-        except ValueError:
-            print(f"  Entrada invalida. Digite um numero entre 1 e {len(categorias)}.")
+        termo = input("  Buscar NCM (descricao ou codigo): ").strip()
+        if not termo:
+            print("  Digite um termo para buscar.")
+            continue
+        resultados = buscar_ncm_local(termo)
+        if not resultados:
+            print("  Nenhum NCM encontrado localmente. Tente outro termo.")
+            continue
+        print()
+        for i, r in enumerate(resultados, start=1):
+            print(f"    {i:>2}. {r['codigo']}  —  {r['descricao']}")
+        print()
+        while True:
+            try:
+                numero = int(input("  Selecione o numero (0 para buscar novamente): ").strip())
+                if numero == 0:
+                    break
+                if 1 <= numero <= len(resultados):
+                    return resultados[numero - 1]
+                print(f"  Numero invalido. Digite entre 1 e {len(resultados)}.")
+            except ValueError:
+                print("  Entrada invalida. Digite um numero.")
 
 
 def _ler_confirmacao(mensagem: str) -> bool:
@@ -174,7 +185,9 @@ def _exibir_resultado(resultado: dict) -> None:
     print(f"  RESULTADO DO CALCULO")
     _separador("=")
     print(f"  Produto          : {ent['nome']}")
-    print(f"  Categoria        : {resultado['categoria']['descricao']}")
+    cat = resultado.get('categoria', {})
+    cat_desc = cat.get('descricao', resultado['entrada'].get('categoria', '—')) if isinstance(cat, dict) else str(cat)
+    print(f"  Categoria        : {cat_desc}")
     print(f"  Origem -> Destino: {ent['uf_origem']} -> {ent['uf_destino']}")
     print(f"  Cotacao do dolar : R$ {resultado['cotacao']:.4f}  ({resultado['fonte_cotacao']})")
     _separador()
@@ -246,16 +259,51 @@ def tela_calcular_produto() -> None:
 
     cotacao, fonte_cotacao = _obter_cotacao_com_fallback()
 
+    print()
+    nome = input("  Nome do produto   : ").strip()
+
+    # Busca e selecao de NCM
+    print()
+    ncm = _ler_ncm()
+    try:
+        aliquotas = obter_aliquotas_ncm(ncm["codigo"])
+    except (ValueError, ConnectionError):
+        aliquotas = ncm
+
+    ii_padrao  = str(round(aliquotas.get("aliquota_ii",  0) * 100, 1))
+    ipi_padrao = str(round(aliquotas.get("aliquota_ipi", 0) * 100, 1))
+
+    while True:
+        try:
+            entrada = input(f"  Aliquota II  % [Enter={ii_padrao}]: ").strip().replace(",", ".")
+            aliq_ii = float(entrada or ii_padrao) / 100
+            break
+        except ValueError:
+            print("  Valor invalido.")
+
+    while True:
+        try:
+            entrada = input(f"  Aliquota IPI % [Enter={ipi_padrao}]: ").strip().replace(",", ".")
+            aliq_ipi = float(entrada or ipi_padrao) / 100
+            break
+        except ValueError:
+            print("  Valor invalido.")
+
     dados = {
-        "nome"         : input("\n  Nome do produto   : ").strip(),
-        "categoria"    : _ler_categoria("  Categoria (numero): "),
+        "nome"           : nome,
+        "categoria"      : ncm["codigo"],
+        "categoria_dados": {
+            "descricao"   : ncm["descricao"],
+            "aliquota_ii" : aliq_ii,
+            "aliquota_ipi": aliq_ipi,
+        },
         "uf_origem"    : _ler_uf("  UF de origem      [Enter=SP]: "),
         "uf_destino"   : _ler_uf("  UF de destino     [Enter=SP]: "),
         "valor_usd"    : _ler_float("  Valor em USD      : $ ", minimo=0.01),
         "frete"        : _ler_float_opcional("  Frete (R$)        [Enter=0]: R$ "),
         "despesas"     : _ler_float_opcional("  Despesas (R$)     [Enter=0]: R$ "),
         "quantidade"   : _ler_int_opcional("  Quantidade (un.)  [Enter=1]: "),
-        "margem"       : _ler_float("  Margem de lucro % : ", minimo=1) / 100,
+        "margem"       : _ler_float("  Margem de lucro % : ", minimo=0.001) / 100,
         "cotacao"      : cotacao,
         "fonte_cotacao": fonte_cotacao,
     }
@@ -304,7 +352,7 @@ def tela_buscar_produto() -> None:
 
 
 def tela_remover_produto() -> None:
-    """Remove um produto pelo ID apos confirmacao."""
+    """Remove um produto pelo ID após confirmacao."""
     print("\n  REMOVER PRODUTO")
     _separador()
     tela_listar_produtos()
@@ -322,7 +370,7 @@ def tela_remover_produto() -> None:
 
 
 # ---------------------------------------------------------------------------
-# Tela de graficos
+# Tela de gráficos
 # ---------------------------------------------------------------------------
 
 def tela_graficos() -> None:

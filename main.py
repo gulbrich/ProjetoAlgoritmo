@@ -1,15 +1,29 @@
 """
 main.py
 -------
-Ponto de entrada do sistema de precificacao de produtos importados.
+Ponto de entrada do sistema de precificação de produtos importados.
 
-Para trocar de interfaces, basta alterar o import abaixo:
-    from interfaces.cli import menu   <- terminal (atual)
-    from interfaces.gui import menu   <- tkinter (futuro)
-    from interfaces.web import menu   <- flask/streamlit (futuro)
+Uso:
+    python main.py        -> interface gráfica (padrão)
+    python main.py --cli  -> interface de linha de comando
 """
 
-from interfaces.cli import menu
+import sys
+import os
+
+# Garante que o diretório raiz do projeto está no sys.path,
+# permitindo imports absolutos como 'from modulos.x import y'
+# independente de onde o script é executado.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+
+def main():
+    if "--cli" in sys.argv:
+        from interfaces.cli import menu
+    else:
+        from interfaces.gui import menu
+    menu()
+
 
 if __name__ == "__main__":
-    menu()
+    main()

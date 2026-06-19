@@ -1,0 +1,402 @@
+{
+  "8517.12.31": {
+    "descricao": "Telefones celulares — smartphones",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "8471.30.19": {
+    "descricao": "Computadores portáteis — notebooks",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8471.41.10": {
+    "descricao": "Computadores desktop",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8528.72.00": {
+    "descricao": "Monitores para computador",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.1
+  },
+  "8528.71.11": {
+    "descricao": "Televisores LCD até 79 polegadas",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.1
+  },
+  "8518.30.00": {
+    "descricao": "Fones de ouvido e headsets",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "8518.22.00": {
+    "descricao": "Alto-falantes e caixas de som",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "8443.32.22": {
+    "descricao": "Impressoras jato de tinta",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "8443.32.31": {
+    "descricao": "Impressoras laser",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.15
+  },
+  "8507.60.00": {
+    "descricao": "Baterias de íons de lítio",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8544.42.00": {
+    "descricao": "Cabos e conectores elétricos",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8504.40.19": {
+    "descricao": "Carregadores e fontes de alimentação",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8523.51.10": {
+    "descricao": "Dispositivos de armazenamento — SSD e pen drives",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8471.60.52": {
+    "descricao": "Teclados e mouses para computador",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8525.80.19": {
+    "descricao": "Câmeras de vídeo digitais — filmadoras",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.1
+  },
+  "9006.53.00": {
+    "descricao": "Câmeras fotográficas digitais",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.1
+  },
+  "8504.31.20": {
+    "descricao": "Transformadores elétricos",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.0
+  },
+  "8414.51.00": {
+    "descricao": "Ventiladores de mesa e de teto",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "8415.10.11": {
+    "descricao": "Condicionadores de ar tipo split",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "8516.50.00": {
+    "descricao": "Fornos de micro-ondas",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "8509.40.10": {
+    "descricao": "Batedeiras e liquidificadores domésticos",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "8516.60.00": {
+    "descricao": "Fornos elétricos e churrasqueiras elétricas",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "8450.11.00": {
+    "descricao": "Máquinas de lavar roupa automáticas",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8418.10.00": {
+    "descricao": "Refrigeradores domésticos",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "6109.10.00": {
+    "descricao": "Camisetas de malha de algodão",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6203.42.00": {
+    "descricao": "Calças e bermudas masculinas de algodão",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6204.62.00": {
+    "descricao": "Calças e bermudas femininas de algodão",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6110.20.10": {
+    "descricao": "Blusas e suéteres de algodão",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6402.99.39": {
+    "descricao": "Calçados esportivos com sola de borracha",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6403.99.90": {
+    "descricao": "Calçados de couro — sapatos e botas",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6201.93.00": {
+    "descricao": "Agasalhos e jaquetas masculinos",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "6116.10.00": {
+    "descricao": "Luvas de borracha ou plástico",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "9403.20.00": {
+    "descricao": "Móveis de metal",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.05
+  },
+  "9403.60.00": {
+    "descricao": "Móveis de madeira para quarto e sala",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.05
+  },
+  "9403.70.00": {
+    "descricao": "Móveis de plástico",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.05
+  },
+  "9404.21.00": {
+    "descricao": "Colchões de espuma de poliuretano",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.0
+  },
+  "6302.21.00": {
+    "descricao": "Roupas de cama de algodão",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "3303.00.10": {
+    "descricao": "Perfumes — extratos (concentração >= 10%)",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.3
+  },
+  "3303.00.20": {
+    "descricao": "Águas de colônia (concentração < 10%)",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.3
+  },
+  "3304.10.00": {
+    "descricao": "Batons e produtos para lábios",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.3
+  },
+  "3304.20.10": {
+    "descricao": "Sombra para olhos e maquiagem facial",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.3
+  },
+  "3304.99.90": {
+    "descricao": "Outros produtos de beleza e maquiagem",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.3
+  },
+  "3305.10.00": {
+    "descricao": "Xampus para cabelo",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "3307.20.10": {
+    "descricao": "Desodorantes e antitranspirantes",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "3401.11.90": {
+    "descricao": "Sabonetes e produtos de higiene pessoal",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "2106.90.90": {
+    "descricao": "Preparações alimentícias diversas",
+    "aliquota_ii": 0.1,
+    "aliquota_ipi": 0.0
+  },
+  "0901.11.00": {
+    "descricao": "Café não torrado, não descafeinado",
+    "aliquota_ii": 0.1,
+    "aliquota_ipi": 0.0
+  },
+  "1806.32.00": {
+    "descricao": "Chocolate em tabletes",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "2202.10.00": {
+    "descricao": "Águas minerais e gaseificadas com açúcar",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "2203.00.00": {
+    "descricao": "Cervejas de malte",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "2208.40.00": {
+    "descricao": "Rum e outras aguardentes de cana",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "3004.90.99": {
+    "descricao": "Medicamentos de uso humano — outros",
+    "aliquota_ii": 0.0,
+    "aliquota_ipi": 0.0
+  },
+  "3004.20.19": {
+    "descricao": "Medicamentos com antibióticos",
+    "aliquota_ii": 0.0,
+    "aliquota_ipi": 0.0
+  },
+  "9018.39.29": {
+    "descricao": "Agulhas e seringas médicas",
+    "aliquota_ii": 0.0,
+    "aliquota_ipi": 0.0
+  },
+  "3301.29.90": {
+    "descricao": "Óleos essenciais diversos",
+    "aliquota_ii": 0.0,
+    "aliquota_ipi": 0.0
+  },
+  "9503.00.10": {
+    "descricao": "Brinquedos — bonecas e bonecos",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.1
+  },
+  "9503.00.99": {
+    "descricao": "Outros brinquedos e jogos",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.1
+  },
+  "9504.50.00": {
+    "descricao": "Videogames e consoles",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.15
+  },
+  "9504.40.00": {
+    "descricao": "Cartas de baralho e jogos de tabuleiro",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.0
+  },
+  "8479.89.99": {
+    "descricao": "Máquinas e aparelhos mecânicos — uso geral",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.05
+  },
+  "8457.10.10": {
+    "descricao": "Centros de usinagem para metais",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.05
+  },
+  "8422.30.90": {
+    "descricao": "Máquinas de embalagem e empacotamento",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.0
+  },
+  "8428.33.00": {
+    "descricao": "Empilhadeiras elétricas",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.0
+  },
+  "8709.11.00": {
+    "descricao": "Veículos industriais — empilhadeiras",
+    "aliquota_ii": 0.14,
+    "aliquota_ipi": 0.0
+  },
+  "8701.20.00": {
+    "descricao": "Tratores para uso agrícola",
+    "aliquota_ii": 0.1,
+    "aliquota_ipi": 0.0
+  },
+  "8703.23.10": {
+    "descricao": "Automóveis com motor 1.0 a 1.6",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.25
+  },
+  "8703.23.20": {
+    "descricao": "Automóveis com motor 1.6 a 2.2",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.3
+  },
+  "8704.21.10": {
+    "descricao": "Veículos de carga a diesel",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.05
+  },
+  "8708.29.99": {
+    "descricao": "Peças e acessórios para veículos",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.05
+  },
+  "9013.80.10": {
+    "descricao": "Instrumentos ópticos — binóculos e lunetas",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.1
+  },
+  "9101.11.00": {
+    "descricao": "Relógios de pulso com mostrador mecânico",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.1
+  },
+  "9102.11.00": {
+    "descricao": "Relógios de pulso elétricos",
+    "aliquota_ii": 0.2,
+    "aliquota_ipi": 0.1
+  },
+  "9201.10.00": {
+    "descricao": "Pianos acústicos",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "9207.10.00": {
+    "descricao": "Instrumentos musicais elétricos — guitarras e teclados",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.05
+  },
+  "9209.91.00": {
+    "descricao": "Cordas para instrumentos musicais",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "4202.12.00": {
+    "descricao": "Malas e artigos de viagem de plástico ou têxtil",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "4202.22.00": {
+    "descricao": "Bolsas femininas de couro",
+    "aliquota_ii": 0.35,
+    "aliquota_ipi": 0.0
+  },
+  "7113.19.00": {
+    "descricao": "Joias e bijuterias de metal precioso",
+    "aliquota_ii": 0.16,
+    "aliquota_ipi": 0.0
+  },
+  "8211.92.10": {
+    "descricao": "Facas de mesa e cozinha em aço inox",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.05
+  },
+  "3926.90.90": {
+    "descricao": "Outras obras de plástico",
+    "aliquota_ii": 0.18,
+    "aliquota_ipi": 0.05
+  }
+}

@@ -1,7 +1,7 @@
 """
 cotacao.py
 ----------
-Busca a cotacao atual do dolar (USD -> BRL) via AwesomeAPI.
+Busca a cotação atual do dólar (USD -> BRL) via AwesomeAPI.
 """
 
 import requests
@@ -12,10 +12,10 @@ TIMEOUT = 5
 
 def obter_cotacao() -> float:
     """
-    Retorna a cotacao de compra do dolar (float).
+    Retorna a cotação de compra do dólar (float).
 
-    Lanca:
-        ConnectionError: se a API estiver inacessivel ou sem resposta
+    Lança:
+        ConnectionError: se a API estiver inacessível ou sem resposta
         ValueError: se a resposta vier em formato inesperado
     """
     try:
@@ -23,9 +23,9 @@ def obter_cotacao() -> float:
         resposta.raise_for_status()
         return float(resposta.json()["USDBRL"]["bid"])
     except requests.exceptions.ConnectionError:
-        raise ConnectionError("Sem conexao com a internet.")
+        raise ConnectionError("Sem conexão com a internet.")
     except requests.exceptions.Timeout:
-        raise ConnectionError(f"API nao respondeu em {TIMEOUT} segundos.")
+        raise ConnectionError(f"API não respondeu em {TIMEOUT} segundos.")
     except requests.exceptions.HTTPError as e:
         raise ConnectionError(f"Erro HTTP: {e}")
     except (KeyError, ValueError):

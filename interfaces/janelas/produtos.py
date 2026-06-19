@@ -19,6 +19,29 @@ FONTE_TITULO = ("Segoe UI", 12, "bold")
 FONTE_SECAO  = ("Segoe UI", 10, "bold")
 
 
+
+def _categoria_do_produto(produto: dict) -> dict:
+    """
+    Reconstrói o dicionário de categoria a partir de um produto salvo.
+
+    Usa categoria_dados se disponível (produtos salvos após a correção).
+    Caso contrário, busca pelo nome da categoria no arquivo JSON.
+    """
+    # Produtos salvos recentemente já têm o dicionário completo
+    if "categoria_dados" in produto:
+        return produto["categoria_dados"]
+    # Produtos salvos antes da correção: busca pelo nome
+    from modulos.categorias import obter_categoria
+    try:
+        return obter_categoria(produto["categoria"])
+    except (ValueError, KeyError):
+        return {
+            "descricao"   : produto.get("categoria", "—"),
+            "aliquota_ii" : 0.0,
+            "aliquota_ipi": 0.0,
+        }
+
+
 class JanelaProdutos(tk.Toplevel):
     """
     Janela de gerenciamento de produtos cadastrados.
@@ -32,17 +55,22 @@ class JanelaProdutos(tk.Toplevel):
         self.title("Produtos Cadastrados")
         self.resizable(True, True)
         self.configure(bg=COR_CINZA)
-        self.grab_set()
+        self.withdraw()  # oculta até estar pronta para exibir
 
         self._construir_layout()
         self._carregar_produtos()
-        self.update_idletasks()
-        self._centralizar()
+        self.after(50, self._exibir_centralizada)
 
-    def _centralizar(self):
-        w, h = self.winfo_width(), self.winfo_height()
-        sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
+    def _exibir_centralizada(self):
+        """Centraliza e exibe a janela após renderização."""
+        self.update_idletasks()
+        w  = self.winfo_reqwidth()
+        h  = self.winfo_reqheight()
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
         self.geometry(f"+{(sw - w) // 2}+{(sh - h) // 2}")
+        self.deiconify()
+        self.grab_set()
 
     def _construir_layout(self):
         # Cabecalho
@@ -179,7 +207,7 @@ class JanelaProdutos(tk.Toplevel):
             messagebox.showerror("Erro", str(e), parent=self)
 
     def _remover(self):
-        """Remove o produto selecionado apos confirmacao."""
+        """Remove o produto selecionado após confirmacao."""
         sel = self._tree.selection()
         if not sel:
             messagebox.showinfo("Seleção", "Selecione um produto.", parent=self)
@@ -212,14 +240,22 @@ class JanelaDetalhes(tk.Toplevel):
         self.title(f"Detalhes — {produto['nome']}")
         self.resizable(True, True)
         self.configure(bg=COR_CINZA)
-        self.grab_set()
+        self.withdraw()  # oculta até estar pronta para exibir
 
-        self._produto  = produto
+        self._produto = produto
         self._construir_layout()
+        self.after(50, self._exibir_centralizada)
+
+    def _exibir_centralizada(self):
+        """Centraliza e exibe a janela após o tkinter calcular seu tamanho real."""
         self.update_idletasks()
-        w, h = self.winfo_width(), self.winfo_height()
-        sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
+        w  = self.winfo_reqwidth()
+        h  = self.winfo_reqheight()
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
         self.geometry(f"+{(sw - w) // 2}+{(sh - h) // 2}")
+        self.deiconify()  # exibe a janela já na posição correta
+        self.grab_set()
 
     def _construir_layout(self):
         p   = self._produto
@@ -259,7 +295,7 @@ class JanelaDetalhes(tk.Toplevel):
         linha("Valor em USD",       f"US$ {ent['valor_usd']:,.2f}")
         linha("Cotação utilizada",  f"R$ {p['cotacao']:.4f} ({p['fonte_cotacao']})")
         linha("Frete internacional",f"R$ {ent['frete']:,.2f}")
-        linha("Despesas aduaneiras",f"R$ {ent['despesas']:,.2f}")
+        linha("Outras despesas",f"R$ {ent['despesas']:,.2f}")
         linha("Quantidade",         f"{prec['quantidade']} unidades")
         linha("Margem desejada",    f"{prec['margem_percentual']:.1f}%")
 
@@ -294,7 +330,7 @@ class JanelaDetalhes(tk.Toplevel):
             "entrada"      : p["entrada"],
             "cotacao"      : p["cotacao"],
             "fonte_cotacao": p["fonte_cotacao"],
-            "categoria"    : p["entrada"],
+            "categoria"    : _categoria_do_produto(p),
             "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"],
             "impostos"     : imp,
             "precificacao" : p["precificacao"],

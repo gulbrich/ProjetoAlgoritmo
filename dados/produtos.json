@@ -1,0 +1,610 @@
+[
+  {
+    "id": "001",
+    "data_cadastro": "2026-06-10 07:55:43",
+    "nome": "Smartphone XYZ",
+    "cotacao": 5.8,
+    "fonte_cotacao": "Manual",
+    "categoria": "eletronicos",
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Smartphone XYZ",
+      "categoria": "eletronicos",
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 1000.0,
+      "frete": 500.0,
+      "despesas": 200.0,
+      "quantidade": 50,
+      "margem": 0.3,
+      "cotacao": 5.8
+    },
+    "impostos": {
+      "valor_aduaneiro": 6300.0,
+      "ii": 1008.0,
+      "ipi": 1096.2,
+      "pis": 132.3,
+      "cofins": 607.95,
+      "icms": 2051.22,
+      "despesas": 200.0,
+      "total_impostos": 4895.67,
+      "custo_total": 11395.67
+    },
+    "precificacao": {
+      "custo_unitario": 11395.67,
+      "preco_venda": 16279.53,
+      "lucro_unitario": 4883.86,
+      "margem_percentual": 30.0,
+      "receita_total": 813976.43,
+      "custo_total_lote": 569783.5,
+      "lucro_total_lote": 244192.93,
+      "quantidade": 50
+    }
+  },
+  {
+    "id": "002",
+    "data_cadastro": "2026-06-10 15:23:02",
+    "nome": "Notebook Pro",
+    "cotacao": 5.9,
+    "fonte_cotacao": "Manual",
+    "categoria": "informatica",
+    "uf_origem": "SP",
+    "uf_destino": "RJ",
+    "entrada": {
+      "nome": "Notebook Pro",
+      "categoria": "informatica",
+      "uf_origem": "SP",
+      "uf_destino": "RJ",
+      "valor_usd": 800.0,
+      "frete": 300.0,
+      "despesas": 150.0,
+      "quantidade": 20,
+      "margem": 0.35,
+      "cotacao": 5.9
+    },
+    "impostos": {
+      "valor_aduaneiro": 5020.0,
+      "ii": 803.2,
+      "ipi": 873.48,
+      "pis": 105.42,
+      "cofins": 484.43,
+      "icms": 1014.07,
+      "despesas": 150.0,
+      "total_impostos": 3280.6,
+      "custo_total": 8450.6
+    },
+    "precificacao": {
+      "custo_unitario": 8450.6,
+      "preco_venda": 13000.92,
+      "lucro_unitario": 4550.32,
+      "margem_percentual": 35.0,
+      "receita_total": 260018.46,
+      "custo_total_lote": 169012.0,
+      "lucro_total_lote": 91006.46,
+      "quantidade": 20
+    }
+  },
+  {
+    "id": "003",
+    "data_cadastro": "2026-06-17 12:12:05",
+    "nome": "Smartphone Galaxy",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8517.12.31",
+    "categoria_dados": {
+      "descricao": "Telefones celulares",
+      "aliquota_ii": 0.16,
+      "aliquota_ipi": 0.15
+    },
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Smartphone Galaxy",
+      "categoria": "8517.12.31",
+      "categoria_dados": {
+        "descricao": "Telefones celulares",
+        "aliquota_ii": 0.16,
+        "aliquota_ipi": 0.15
+      },
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 300.0,
+      "frete": 150.0,
+      "despesas": 50.0,
+      "quantidade": 10,
+      "margem": 0.35,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 1755.0,
+      "ii": 280.8,
+      "ipi": 305.37,
+      "pis": 36.86,
+      "cofins": 169.36,
+      "icms": 560.28,
+      "frete_unitario": 15.0,
+      "despesas_unitario": 5.0,
+      "despesas": 5.0,
+      "total_impostos": 1352.66,
+      "custo_total": 3112.66,
+      "frete_lote": 150.0,
+      "despesas_lote": 50.0
+    },
+    "precificacao": {
+      "custo_unitario": 3112.66,
+      "preco_venda": 4788.71,
+      "lucro_unitario": 1676.05,
+      "margem_percentual": 35.0,
+      "receita_total": 47887.08,
+      "custo_total_lote": 31126.6,
+      "lucro_total_lote": 16760.48,
+      "quantidade": 10
+    }
+  },
+  {
+    "id": "004",
+    "data_cadastro": "2026-06-17 18:14:31",
+    "nome": "Smartphone Galaxy",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8517.12.31",
+    "categoria_dados": {
+      "descricao": "Telefones celulares",
+      "aliquota_ii": 0.16,
+      "aliquota_ipi": 0.15
+    },
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Smartphone Galaxy",
+      "categoria": "8517.12.31",
+      "categoria_dados": {
+        "descricao": "Telefones celulares",
+        "aliquota_ii": 0.16,
+        "aliquota_ipi": 0.15
+      },
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 300.0,
+      "frete": 150.0,
+      "despesas": 50.0,
+      "quantidade": 10,
+      "margem": 0.35,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 1755.0,
+      "ii": 280.8,
+      "ipi": 305.37,
+      "pis": 36.86,
+      "cofins": 169.36,
+      "icms": 560.28,
+      "frete_unitario": 15.0,
+      "despesas_unitario": 5.0,
+      "despesas": 5.0,
+      "total_impostos": 1352.66,
+      "custo_total": 3112.66,
+      "frete_lote": 150.0,
+      "despesas_lote": 50.0
+    },
+    "precificacao": {
+      "custo_unitario": 3112.66,
+      "preco_venda": 4788.71,
+      "lucro_unitario": 1676.05,
+      "margem_percentual": 35.0,
+      "receita_total": 47887.08,
+      "custo_total_lote": 31126.6,
+      "lucro_total_lote": 16760.48,
+      "quantidade": 10
+    }
+  },
+  {
+    "id": "005",
+    "data_cadastro": "2026-06-17 18:15:03",
+    "nome": "Smartphone Galaxy",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8517.12.31",
+    "categoria_dados": {
+      "descricao": "Telefones celulares",
+      "aliquota_ii": 0.16,
+      "aliquota_ipi": 0.15
+    },
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Smartphone Galaxy",
+      "categoria": "8517.12.31",
+      "categoria_dados": {
+        "descricao": "Telefones celulares",
+        "aliquota_ii": 0.16,
+        "aliquota_ipi": 0.15
+      },
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 300.0,
+      "frete": 150.0,
+      "despesas": 50.0,
+      "quantidade": 10,
+      "margem": 0.35,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 1755.0,
+      "ii": 280.8,
+      "ipi": 305.37,
+      "pis": 36.86,
+      "cofins": 169.36,
+      "icms": 560.28,
+      "frete_unitario": 15.0,
+      "despesas_unitario": 5.0,
+      "despesas": 5.0,
+      "total_impostos": 1352.66,
+      "custo_total": 3112.66,
+      "frete_lote": 150.0,
+      "despesas_lote": 50.0
+    },
+    "precificacao": {
+      "custo_unitario": 3112.66,
+      "preco_venda": 4788.71,
+      "lucro_unitario": 1676.05,
+      "margem_percentual": 35.0,
+      "receita_total": 47887.08,
+      "custo_total_lote": 31126.6,
+      "lucro_total_lote": 16760.48,
+      "quantidade": 10
+    }
+  },
+  {
+    "id": "006",
+    "data_cadastro": "2026-06-17 18:15:03",
+    "nome": "Perfume Importado",
+    "cotacao": 5.8,
+    "fonte_cotacao": "Manual",
+    "categoria": "3303.00.20",
+    "categoria_dados": {
+      "descricao": "Águas de colônia",
+      "aliquota_ii": 0.2,
+      "aliquota_ipi": 0.3
+    },
+    "uf_origem": "SP",
+    "uf_destino": "BA",
+    "entrada": {
+      "nome": "Perfume Importado",
+      "categoria": "3303.00.20",
+      "categoria_dados": {
+        "descricao": "Águas de colônia",
+        "aliquota_ii": 0.2,
+        "aliquota_ipi": 0.3
+      },
+      "uf_origem": "SP",
+      "uf_destino": "BA",
+      "valor_usd": 50.0,
+      "frete": 0.0,
+      "despesas": 0.0,
+      "quantidade": 100,
+      "margem": 1.5,
+      "cotacao": 5.8,
+      "fonte_cotacao": "Manual"
+    },
+    "impostos": {
+      "valor_aduaneiro": 290.0,
+      "ii": 58.0,
+      "ipi": 104.4,
+      "pis": 6.09,
+      "cofins": 27.98,
+      "icms": 36.62,
+      "frete_unitario": 0.0,
+      "despesas_unitario": 0.0,
+      "despesas": 0.0,
+      "total_impostos": 233.09,
+      "custo_total": 523.09,
+      "frete_lote": 0.0,
+      "despesas_lote": 0.0
+    },
+    "precificacao": {
+      "custo_unitario": 523.09,
+      "preco_venda": 1307.73,
+      "lucro_unitario": 784.64,
+      "margem_percentual": 150.0,
+      "receita_total": 130772.5,
+      "custo_total_lote": 52309.0,
+      "lucro_total_lote": 78463.5,
+      "quantidade": 100
+    }
+  },
+  {
+    "id": "007",
+    "data_cadastro": "2026-06-17 18:15:03",
+    "nome": "Torno CNC",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8457.10.10",
+    "categoria_dados": {
+      "descricao": "Centros de usinagem",
+      "aliquota_ii": 0.14,
+      "aliquota_ipi": 0.05
+    },
+    "uf_origem": "AM",
+    "uf_destino": "RJ",
+    "entrada": {
+      "nome": "Torno CNC",
+      "categoria": "8457.10.10",
+      "categoria_dados": {
+        "descricao": "Centros de usinagem",
+        "aliquota_ii": 0.14,
+        "aliquota_ipi": 0.05
+      },
+      "uf_origem": "AM",
+      "uf_destino": "RJ",
+      "valor_usd": 15000.0,
+      "frete": 0.0,
+      "despesas": 500.0,
+      "quantidade": 1,
+      "margem": 0.25,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 87000.0,
+      "ii": 12180.0,
+      "ipi": 4959.0,
+      "pis": 1827.0,
+      "cofins": 8395.5,
+      "icms": 15662.93,
+      "frete_unitario": 0.0,
+      "despesas_unitario": 500.0,
+      "despesas": 500.0,
+      "total_impostos": 43024.43,
+      "custo_total": 130524.43,
+      "frete_lote": 0.0,
+      "despesas_lote": 500.0
+    },
+    "precificacao": {
+      "custo_unitario": 130524.43,
+      "preco_venda": 174032.57,
+      "lucro_unitario": 43508.14,
+      "margem_percentual": 25.0,
+      "receita_total": 174032.57,
+      "custo_total_lote": 130524.43,
+      "lucro_total_lote": 43508.14,
+      "quantidade": 1
+    }
+  },
+  {
+    "id": "008",
+    "data_cadastro": "2026-06-18 01:35:57",
+    "nome": "Smartphone",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8517.12.31",
+    "categoria_dados": {
+      "descricao": "Telefones",
+      "aliquota_ii": 0.16,
+      "aliquota_ipi": 0.15
+    },
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Smartphone",
+      "categoria": "8517.12.31",
+      "categoria_dados": {
+        "descricao": "Telefones",
+        "aliquota_ii": 0.16,
+        "aliquota_ipi": 0.15
+      },
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 300.0,
+      "frete": 150.0,
+      "despesas": 50.0,
+      "quantidade": 10,
+      "margem": 0.35,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 1755.0,
+      "ii": 280.8,
+      "ipi": 305.37,
+      "pis": 36.86,
+      "cofins": 169.36,
+      "icms": 560.28,
+      "frete_unitario": 15.0,
+      "despesas_unitario": 5.0,
+      "despesas": 5.0,
+      "total_impostos": 1352.66,
+      "custo_total": 3112.66,
+      "frete_lote": 150.0,
+      "despesas_lote": 50.0
+    },
+    "precificacao": {
+      "custo_unitario": 3112.66,
+      "preco_venda": 4788.71,
+      "lucro_unitario": 1676.05,
+      "margem_percentual": 35.0,
+      "receita_total": 47887.08,
+      "custo_total_lote": 31126.6,
+      "lucro_total_lote": 16760.48,
+      "quantidade": 10
+    }
+  },
+  {
+    "id": "009",
+    "data_cadastro": "2026-06-18 01:35:57",
+    "nome": "Perfume",
+    "cotacao": 5.8,
+    "fonte_cotacao": "Manual",
+    "categoria": "3303.00.20",
+    "categoria_dados": {
+      "descricao": "Aguas de colonia",
+      "aliquota_ii": 0.2,
+      "aliquota_ipi": 0.3
+    },
+    "uf_origem": "SP",
+    "uf_destino": "BA",
+    "entrada": {
+      "nome": "Perfume",
+      "categoria": "3303.00.20",
+      "categoria_dados": {
+        "descricao": "Aguas de colonia",
+        "aliquota_ii": 0.2,
+        "aliquota_ipi": 0.3
+      },
+      "uf_origem": "SP",
+      "uf_destino": "BA",
+      "valor_usd": 50.0,
+      "frete": 0.0,
+      "despesas": 0.0,
+      "quantidade": 100,
+      "margem": 1.5,
+      "cotacao": 5.8,
+      "fonte_cotacao": "Manual"
+    },
+    "impostos": {
+      "valor_aduaneiro": 290.0,
+      "ii": 58.0,
+      "ipi": 104.4,
+      "pis": 6.09,
+      "cofins": 27.98,
+      "icms": 36.62,
+      "frete_unitario": 0.0,
+      "despesas_unitario": 0.0,
+      "despesas": 0.0,
+      "total_impostos": 233.09,
+      "custo_total": 523.09,
+      "frete_lote": 0.0,
+      "despesas_lote": 0.0
+    },
+    "precificacao": {
+      "custo_unitario": 523.09,
+      "preco_venda": 1307.73,
+      "lucro_unitario": 784.64,
+      "margem_percentual": 150.0,
+      "receita_total": 130772.5,
+      "custo_total_lote": 52309.0,
+      "lucro_total_lote": 78463.5,
+      "quantidade": 100
+    }
+  },
+  {
+    "id": "010",
+    "data_cadastro": "2026-06-18 01:35:57",
+    "nome": "Torno CNC",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8457.10.10",
+    "categoria_dados": {
+      "descricao": "Usinagem",
+      "aliquota_ii": 0.14,
+      "aliquota_ipi": 0.05
+    },
+    "uf_origem": "AM",
+    "uf_destino": "RJ",
+    "entrada": {
+      "nome": "Torno CNC",
+      "categoria": "8457.10.10",
+      "categoria_dados": {
+        "descricao": "Usinagem",
+        "aliquota_ii": 0.14,
+        "aliquota_ipi": 0.05
+      },
+      "uf_origem": "AM",
+      "uf_destino": "RJ",
+      "valor_usd": 15000.0,
+      "frete": 0.0,
+      "despesas": 500.0,
+      "quantidade": 1,
+      "margem": 0.25,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 87000.0,
+      "ii": 12180.0,
+      "ipi": 4959.0,
+      "pis": 1827.0,
+      "cofins": 8395.5,
+      "icms": 15662.93,
+      "frete_unitario": 0.0,
+      "despesas_unitario": 500.0,
+      "despesas": 500.0,
+      "total_impostos": 43024.43,
+      "custo_total": 130524.43,
+      "frete_lote": 0.0,
+      "despesas_lote": 500.0
+    },
+    "precificacao": {
+      "custo_unitario": 130524.43,
+      "preco_venda": 174032.57,
+      "lucro_unitario": 43508.14,
+      "margem_percentual": 25.0,
+      "receita_total": 174032.57,
+      "custo_total_lote": 130524.43,
+      "lucro_total_lote": 43508.14,
+      "quantidade": 1
+    }
+  },
+  {
+    "id": "011",
+    "data_cadastro": "2026-06-18 01:36:20",
+    "nome": "Teste",
+    "cotacao": 5.8,
+    "fonte_cotacao": "API",
+    "categoria": "8517.12.31",
+    "categoria_dados": {
+      "descricao": "Telefones",
+      "aliquota_ii": 0.16,
+      "aliquota_ipi": 0.15
+    },
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Teste",
+      "categoria": "8517.12.31",
+      "categoria_dados": {
+        "descricao": "Telefones",
+        "aliquota_ii": 0.16,
+        "aliquota_ipi": 0.15
+      },
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 100.0,
+      "frete": 0.0,
+      "despesas": 0.0,
+      "quantidade": 1,
+      "margem": 0.3,
+      "cotacao": 5.8,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 580.0,
+      "ii": 92.8,
+      "ipi": 100.92,
+      "pis": 12.18,
+      "cofins": 55.97,
+      "icms": 184.8,
+      "frete_unitario": 0.0,
+      "despesas_unitario": 0.0,
+      "despesas": 0.0,
+      "total_impostos": 446.67,
+      "custo_total": 1026.67,
+      "frete_lote": 0.0,
+      "despesas_lote": 0.0
+    },
+    "precificacao": {
+      "custo_unitario": 1026.67,
+      "preco_venda": 1466.67,
+      "lucro_unitario": 440.0,
+      "margem_percentual": 30.0,
+      "receita_total": 1466.67,
+      "custo_total_lote": 1026.67,
+      "lucro_total_lote": 440.0,
+      "quantidade": 1
+    }
+  }
+]

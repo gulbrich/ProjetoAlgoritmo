@@ -1,0 +1,293 @@
+{
+  "01": {
+    "aliquota_ii": 0.1
+  },
+  "02": {
+    "aliquota_ii": 0.1
+  },
+  "03": {
+    "aliquota_ii": 0.1
+  },
+  "04": {
+    "aliquota_ii": 0.1
+  },
+  "05": {
+    "aliquota_ii": 0.1
+  },
+  "06": {
+    "aliquota_ii": 0.1
+  },
+  "07": {
+    "aliquota_ii": 0.1
+  },
+  "08": {
+    "aliquota_ii": 0.1
+  },
+  "09": {
+    "aliquota_ii": 0.1
+  },
+  "10": {
+    "aliquota_ii": 0.1
+  },
+  "11": {
+    "aliquota_ii": 0.1
+  },
+  "12": {
+    "aliquota_ii": 0.1
+  },
+  "13": {
+    "aliquota_ii": 0.1
+  },
+  "14": {
+    "aliquota_ii": 0.1
+  },
+  "15": {
+    "aliquota_ii": 0.1
+  },
+  "16": {
+    "aliquota_ii": 0.1
+  },
+  "17": {
+    "aliquota_ii": 0.1
+  },
+  "18": {
+    "aliquota_ii": 0.1
+  },
+  "19": {
+    "aliquota_ii": 0.1
+  },
+  "20": {
+    "aliquota_ii": 0.1
+  },
+  "21": {
+    "aliquota_ii": 0.1
+  },
+  "22": {
+    "aliquota_ii": 0.18
+  },
+  "23": {
+    "aliquota_ii": 0.1
+  },
+  "24": {
+    "aliquota_ii": 0.2
+  },
+  "25": {
+    "aliquota_ii": 0.02
+  },
+  "26": {
+    "aliquota_ii": 0.02
+  },
+  "27": {
+    "aliquota_ii": 0.02
+  },
+  "28": {
+    "aliquota_ii": 0.04
+  },
+  "29": {
+    "aliquota_ii": 0.06
+  },
+  "30": {
+    "aliquota_ii": 0.0
+  },
+  "31": {
+    "aliquota_ii": 0.04
+  },
+  "32": {
+    "aliquota_ii": 0.1
+  },
+  "33": {
+    "aliquota_ii": 0.2
+  },
+  "34": {
+    "aliquota_ii": 0.14
+  },
+  "35": {
+    "aliquota_ii": 0.08
+  },
+  "36": {
+    "aliquota_ii": 0.1
+  },
+  "37": {
+    "aliquota_ii": 0.16
+  },
+  "38": {
+    "aliquota_ii": 0.1
+  },
+  "39": {
+    "aliquota_ii": 0.14
+  },
+  "40": {
+    "aliquota_ii": 0.14
+  },
+  "41": {
+    "aliquota_ii": 0.1
+  },
+  "42": {
+    "aliquota_ii": 0.35
+  },
+  "43": {
+    "aliquota_ii": 0.2
+  },
+  "44": {
+    "aliquota_ii": 0.12
+  },
+  "45": {
+    "aliquota_ii": 0.12
+  },
+  "46": {
+    "aliquota_ii": 0.12
+  },
+  "47": {
+    "aliquota_ii": 0.06
+  },
+  "48": {
+    "aliquota_ii": 0.1
+  },
+  "49": {
+    "aliquota_ii": 0.1
+  },
+  "50": {
+    "aliquota_ii": 0.2
+  },
+  "51": {
+    "aliquota_ii": 0.2
+  },
+  "52": {
+    "aliquota_ii": 0.2
+  },
+  "53": {
+    "aliquota_ii": 0.2
+  },
+  "54": {
+    "aliquota_ii": 0.2
+  },
+  "55": {
+    "aliquota_ii": 0.2
+  },
+  "56": {
+    "aliquota_ii": 0.2
+  },
+  "57": {
+    "aliquota_ii": 0.2
+  },
+  "58": {
+    "aliquota_ii": 0.2
+  },
+  "59": {
+    "aliquota_ii": 0.2
+  },
+  "60": {
+    "aliquota_ii": 0.2
+  },
+  "61": {
+    "aliquota_ii": 0.35
+  },
+  "62": {
+    "aliquota_ii": 0.35
+  },
+  "63": {
+    "aliquota_ii": 0.35
+  },
+  "64": {
+    "aliquota_ii": 0.35
+  },
+  "65": {
+    "aliquota_ii": 0.2
+  },
+  "66": {
+    "aliquota_ii": 0.2
+  },
+  "67": {
+    "aliquota_ii": 0.2
+  },
+  "68": {
+    "aliquota_ii": 0.12
+  },
+  "69": {
+    "aliquota_ii": 0.12
+  },
+  "70": {
+    "aliquota_ii": 0.12
+  },
+  "71": {
+    "aliquota_ii": 0.16
+  },
+  "72": {
+    "aliquota_ii": 0.12
+  },
+  "73": {
+    "aliquota_ii": 0.14
+  },
+  "74": {
+    "aliquota_ii": 0.14
+  },
+  "75": {
+    "aliquota_ii": 0.1
+  },
+  "76": {
+    "aliquota_ii": 0.12
+  },
+  "77": {
+    "aliquota_ii": 0.1
+  },
+  "78": {
+    "aliquota_ii": 0.12
+  },
+  "79": {
+    "aliquota_ii": 0.12
+  },
+  "80": {
+    "aliquota_ii": 0.12
+  },
+  "81": {
+    "aliquota_ii": 0.1
+  },
+  "82": {
+    "aliquota_ii": 0.16
+  },
+  "83": {
+    "aliquota_ii": 0.16
+  },
+  "84": {
+    "aliquota_ii": 0.14
+  },
+  "85": {
+    "aliquota_ii": 0.16
+  },
+  "86": {
+    "aliquota_ii": 0.14
+  },
+  "87": {
+    "aliquota_ii": 0.35
+  },
+  "88": {
+    "aliquota_ii": 0.14
+  },
+  "89": {
+    "aliquota_ii": 0.14
+  },
+  "90": {
+    "aliquota_ii": 0.16
+  },
+  "91": {
+    "aliquota_ii": 0.2
+  },
+  "92": {
+    "aliquota_ii": 0.16
+  },
+  "93": {
+    "aliquota_ii": 0.2
+  },
+  "94": {
+    "aliquota_ii": 0.18
+  },
+  "95": {
+    "aliquota_ii": 0.2
+  },
+  "96": {
+    "aliquota_ii": 0.16
+  },
+  "97": {
+    "aliquota_ii": 0.1
+  }
+}

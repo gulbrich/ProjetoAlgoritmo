@@ -37,10 +37,11 @@ def _salvar_ou_exibir(caminho: str = None) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Graficos
+# gráficos
 # ---------------------------------------------------------------------------
 
-def composicao_custo(resultado: dict, caminho: str = None) -> None:
+def composicao_custo(resultado: dict, caminho: str = None,
+                     _ax=None) -> None:
     """
     Gera grafico de pizza com a composicao do custo do produto.
 
@@ -54,13 +55,16 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
         resultado : dicionario retornado por controller.calcular_produto()
         caminho   : se informado, salva o grafico neste caminho (.png, .pdf)
                     se None, exibe na tela
+        _ax       : eixo matplotlib externo (usado para embutir em GUI tkinter)
     """
     imp     = resultado["impostos"]
+    prec    = resultado["precificacao"]
     entrada = resultado["entrada"]
     nome    = entrada["nome"]
 
     valor_produto = float(entrada["valor_usd"]) * float(entrada["cotacao"])
-    frete         = float(entrada["frete"])
+    frete         = float(entrada["frete"]) / int(entrada.get("quantidade", 1))
+    lucro         = prec["lucro_unitario"]
 
     labels = [
         "Valor do Produto",
@@ -70,7 +74,8 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
         "PIS (2,10%)",
         "COFINS (9,65%)",
         f"ICMS ({resultado['aliquota_icms']*100:.0f}%)",
-        "Despesas Aduaneiras",
+        "Outras Despesas",
+        "Lucro",
     ]
     valores = [
         valor_produto,
@@ -81,16 +86,24 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
         imp["cofins"],
         imp["icms"],
         imp["despesas"],
+        lucro,
     ]
 
-    # Remove fatias com valor zero para nao poluir o grafico
+    # Remove fatias com valor zero para não poluir o gráfico
     pares = [(l, v) for l, v in zip(labels, valores) if v > 0]
     labels, valores = zip(*pares)
 
-    cores = ["#2E75B6", "#A8C7E8", "#DD8452", "#55A868", "#C44E52",
-             "#8172B2", "#937860", "#B5CFE8"][:len(valores)]
+    # Verde para lucro, cores distintas para os demais
+    cores_base = ["#2E75B6", "#A8C7E8", "#DD8452", "#55A868", "#C44E52",
+                  "#8172B2", "#937860", "#B5CFE8", "#70AD47"]
+    cores = [cores_base[8] if l == "Lucro" else cores_base[i % 8]
+             for i, l in enumerate(labels)]
 
-    fig, ax = plt.subplots(figsize=(8, 6))
+    if _ax is not None:
+        ax = _ax
+    else:
+        fig, ax = plt.subplots(figsize=(8, 6))
+
     wedges, texts, autotexts = ax.pie(
         valores,
         labels=None,
@@ -111,18 +124,20 @@ def composicao_custo(resultado: dict, caminho: str = None) -> None:
         fontsize=9,
     )
 
-    custo_total = imp["custo_total"]
+    preco_venda = prec["preco_venda"]
     ax.set_title(
-        f"Composicao do Custo — {nome}\n"
-        f"Custo total: R$ {custo_total:,.2f}",
+        f"Composição do Preço de Venda — {nome}\n"
+        f"Preço de venda: R$ {preco_venda:,.2f}",
         fontsize=12,
         pad=16,
     )
 
-    _salvar_ou_exibir(caminho)
+    if _ax is None:
+        _salvar_ou_exibir(caminho)
 
 
-def comparativo_produtos(resultados: list, caminho: str = None) -> None:
+def comparativo_produtos(resultados: list, caminho: str = None,
+                         _ax=None) -> None:
     """
     Gera grafico de barras agrupadas comparando multiplos produtos.
 
@@ -162,7 +177,10 @@ def comparativo_produtos(resultados: list, caminho: str = None) -> None:
     x       = list(range(len(nomes)))
     largura = 0.25
 
-    fig, ax = plt.subplots(figsize=(max(6, len(nomes) * 1.8), 6))
+    if _ax is not None:
+        ax = _ax
+    else:
+        fig, ax = plt.subplots(figsize=(max(6, len(nomes) * 1.8), 6))
 
     pos_imp  = [xi - largura for xi in x]
     pos_desp = [xi           for xi in x]
@@ -186,11 +204,13 @@ def comparativo_produtos(resultados: list, caminho: str = None) -> None:
     ax.set_title("Comparativo de Produtos — Carga Tributaria e Margem (%)", fontsize=12)
     ax.legend(loc="upper right", fontsize=9)
 
-    _salvar_ou_exibir(caminho)
+    if _ax is None:
+        _salvar_ou_exibir(caminho)
 
 
 def comparativo_estados(resultado_base: dict, estados: list,
-                        calcular_fn, caminho: str = None) -> None:
+                        calcular_fn, caminho: str = None,
+                        _ax=None) -> None:
     """
     Gera grafico de barras com o preco de venda por estado de destino.
 
@@ -218,7 +238,10 @@ def comparativo_estados(resultado_base: dict, estados: list,
         precos.append(r["precificacao"]["preco_venda"])
         icms_vals.append(r["impostos"]["icms"])
 
-    fig, ax = plt.subplots(figsize=(max(6, len(estados) * 0.9), 5))
+    if _ax is not None:
+        ax = _ax
+    else:
+        fig, ax = plt.subplots(figsize=(max(6, len(estados) * 0.9), 5))
 
     cores = ["#C44E52" if uf == entrada_base["uf_destino"] else "#4C72B0"
              for uf in estados]
@@ -250,4 +273,5 @@ def comparativo_estados(resultado_base: dict, estados: list,
         fontsize=11,
     )
 
-    _salvar_ou_exibir(caminho)
+    if _ax is None:
+        _salvar_ou_exibir(caminho)

@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4f434bc-e852-454e-ad88-559338ecdb47" name="Changes" comment="primeira versão quase funcional">
+      <change afterPath="$PROJECT_DIR$/dados/ncm.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dados/ncm_capitulos.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dados/produtos.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/gui.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/janelas/graficos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modulos/calcular.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modulos/ncm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/graficos.py" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/graficos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/janelas/calcular.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/janelas/calcular.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/janelas/produtos.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/janelas/produtos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/cotacao.py" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cotacao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/precificacao.py" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/precificacao.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +133,9 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3EaFxsM784L2Kz2RkY6OXL97cbc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -154,6 +171,8 @@
       <recent name="$PROJECT_DIR$/dados" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modulos" />
+      <recent name="$PROJECT_DIR$/interfaces" />
       <recent name="$PROJECT_DIR$/dados" />
     </key>
   </component>
@@ -366,7 +385,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$produtos.coverage" NAME="produtos Coverage Results" MODIFIED="1781175754011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interfaces/janelas" />
-    <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$main.coverage" NAME="main Coverage Results" MODIFIED="1781215926823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$main.coverage" NAME="main Coverage Results" MODIFIED="1781844171274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$graficos.coverage" NAME="graficos Coverage Results" MODIFIED="1781124159603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interfaces" />
     <SUITE FILE_PATH="coverage/ProjetoAlgoritmo$calcular.coverage" NAME="calcular Coverage Results" MODIFIED="1781178542401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interfaces/janelas" />
   </component>
