@@ -1,23 +1,23 @@
 """
 impostos.py
 -----------
-Calculo dos impostos incidentes sobre produtos importados no Brasil.
+Cálculo dos impostos incidentes sobre produtos importados no Brasil.
 
-Ordem de calculo (cascata):
+Ordem de cálculo (cascata):
     1. Valor Aduaneiro (VA)
-    2. Imposto de Importacao (II)       - base: VA
+    2. Imposto de Importação (II)       - base: VA
     3. IPI                              - base: VA + II
-    4. PIS-Importacao                   - base: VA
-    5. COFINS-Importacao                - base: VA
-    6. ICMS (calculo "por dentro")      - base: VA + II + IPI + PIS + COFINS + despesas
+    4. PIS-Importação                   - base: VA
+    5. COFINS-Importação                - base: VA
+    6. ICMS (cálculo "por dentro")      - base: VA + II + IPI + PIS + COFINS + despesas
 
-Referencias:
+Referências:
     - II e IPI : Receita Federal / TIPI
-    - PIS/COFINS: Lei 10.865/2004 (aliquotas 2,10% e 9,65%)
-    - ICMS      : base "por dentro" conforme legislacao estadual
+    - PIS/COFINS: Lei 10.865/2004 (alíquotas 2,10% e 9,65%)
+    - ICMS      : base "por dentro" conforme legislação estadual
 """
 
-# Aliquotas federais fixas de PIS e COFINS na importacao (Lei 10.865/2004)
+# Alíquotas federais fixas de PIS e COFINS na importação (Lei 10.865/2004)
 ALIQUOTA_PIS    = 0.0210
 ALIQUOTA_COFINS = 0.0965
 
@@ -26,11 +26,11 @@ def _validar_entradas(valor_usd: float, cotacao: float, frete: float,
                       aliquota_ii: float, aliquota_ipi: float,
                       aliquota_icms: float, despesas: float) -> None:
     """
-    Valida os parametros de entrada antes do calculo.
+    Valida os parâmetros de entrada antes do cálculo.
 
-    Lanca:
-        TypeError : se algum parametro nao for numerico
-        ValueError: se algum parametro estiver fora do intervalo esperado
+    Lança:
+        TypeError : se algum parâmetro não for numérico
+        ValueError: se algum parâmetro estiver fora do intervalo esperado
     """
     campos_positivos = {
         "valor_usd": valor_usd,
@@ -48,7 +48,7 @@ def _validar_entradas(valor_usd: float, cotacao: float, frete: float,
 
     for nome, valor in {**campos_positivos, **campos_nao_negativos, **aliquotas}.items():
         if not isinstance(valor, (int, float)):
-            raise TypeError(f"'{nome}' deve ser numerico, recebido: {type(valor).__name__}.")
+            raise TypeError(f"'{nome}' deve ser numérico, recebido: {type(valor).__name__}.")
 
     for nome, valor in campos_positivos.items():
         if valor <= 0:
@@ -56,7 +56,7 @@ def _validar_entradas(valor_usd: float, cotacao: float, frete: float,
 
     for nome, valor in campos_nao_negativos.items():
         if valor < 0:
-            raise ValueError(f"'{nome}' nao pode ser negativo, recebido: {valor}.")
+            raise ValueError(f"'{nome}' não pode ser negativo, recebido: {valor}.")
 
     for nome, valor in aliquotas.items():
         if not (0 <= valor < 1):
@@ -69,9 +69,9 @@ def calcular_valor_aduaneiro(valor_usd: float, cotacao: float, frete: float) -> 
     """
     Calcula o Valor Aduaneiro (VA), base de todos os impostos.
 
-    Parametros:
-        valor_usd : valor do produto em dolares
-        cotacao   : cotacao do dolar em reais (R$/USD)
+    Parâmetros:
+        valor_usd : valor do produto em dólares
+        cotacao   : cotação do dólar em reais (R$/USD)
         frete     : frete internacional em reais
 
     Retorna:
@@ -82,13 +82,13 @@ def calcular_valor_aduaneiro(valor_usd: float, cotacao: float, frete: float) -> 
 
 def calcular_ii(valor_aduaneiro: float, aliquota: float) -> float:
     """
-    Calcula o Imposto de Importacao (II).
+    Calcula o Imposto de Importação (II).
 
-    Base de calculo: Valor Aduaneiro.
+    Base de cálculo: Valor Aduaneiro.
 
-    Parametros:
-        valor_aduaneiro : base de calculo em reais
-        aliquota        : aliquota do II (ex: 0.16 para 16%)
+    Parâmetros:
+        valor_aduaneiro : base de cálculo em reais
+        aliquota        : alíquota do II (ex: 0.16 para 16%)
 
     Retorna:
         float: valor do II em reais
@@ -100,12 +100,12 @@ def calcular_ipi(valor_aduaneiro: float, ii: float, aliquota: float) -> float:
     """
     Calcula o Imposto sobre Produtos Industrializados (IPI).
 
-    Base de calculo: Valor Aduaneiro + II.
+    Base de cálculo: Valor Aduaneiro + II.
 
-    Parametros:
+    Parâmetros:
         valor_aduaneiro : base inicial em reais
-        ii              : valor do II ja calculado
-        aliquota        : aliquota do IPI (ex: 0.15 para 15%)
+        ii              : valor do II já calculado
+        aliquota        : alíquota do IPI (ex: 0.15 para 15%)
 
     Retorna:
         float: valor do IPI em reais
@@ -115,13 +115,13 @@ def calcular_ipi(valor_aduaneiro: float, ii: float, aliquota: float) -> float:
 
 def calcular_pis(valor_aduaneiro: float) -> float:
     """
-    Calcula o PIS-Importacao.
+    Calcula o PIS-Importação.
 
-    Base de calculo: Valor Aduaneiro (Lei 10.865/2004).
-    Aliquota fixa: 2,10%.
+    Base de cálculo: Valor Aduaneiro (Lei 10.865/2004).
+    Alíquota fixa: 2,10%.
 
-    Parametros:
-        valor_aduaneiro : base de calculo em reais
+    Parâmetros:
+        valor_aduaneiro : base de cálculo em reais
 
     Retorna:
         float: valor do PIS em reais
@@ -131,13 +131,13 @@ def calcular_pis(valor_aduaneiro: float) -> float:
 
 def calcular_cofins(valor_aduaneiro: float) -> float:
     """
-    Calcula a COFINS-Importacao.
+    Calcula a COFINS-Importação.
 
-    Base de calculo: Valor Aduaneiro (Lei 10.865/2004).
-    Aliquota fixa: 9,65%.
+    Base de cálculo: Valor Aduaneiro (Lei 10.865/2004).
+    Alíquota fixa: 9,65%.
 
-    Parametros:
-        valor_aduaneiro : base de calculo em reais
+    Parâmetros:
+        valor_aduaneiro : base de cálculo em reais
 
     Retorna:
         float: valor da COFINS em reais
@@ -149,24 +149,21 @@ def calcular_icms(valor_aduaneiro: float, ii: float, ipi: float,
                   pis: float, cofins: float, despesas: float,
                   aliquota: float) -> float:
     """
-    Calcula o ICMS na importacao pelo metodo "por dentro".
+    Calcula o ICMS na importação pelo método "por dentro".
 
-    O ICMS integra sua propria base de calculo, exigindo formula fechada:
+    O ICMS integra sua própria base de cálculo, exigindo fórmula fechada:
         ICMS = base_parcial * aliquota / (1 - aliquota)
     onde:
         base_parcial = VA + II + IPI + PIS + COFINS + despesas_aduaneiras
 
-    Nota: despesas aduaneiras entram na base do ICMS mas nao sao imposto.
-    Elas sao somadas ao custo_total separadamente em calcular_todos().
-
-    Parametros:
+    Parâmetros:
         valor_aduaneiro : VA em reais
         ii              : valor do II
         ipi             : valor do IPI
         pis             : valor do PIS
         cofins          : valor da COFINS
         despesas        : despesas aduaneiras (SISCOMEX, despachante, etc.)
-        aliquota        : aliquota do ICMS do estado (ex: 0.18 para 18%)
+        aliquota        : alíquota do ICMS do estado (ex: 0.18 para 18%)
 
     Retorna:
         float: valor do ICMS em reais
@@ -177,57 +174,75 @@ def calcular_icms(valor_aduaneiro: float, ii: float, ipi: float,
 
 def calcular_todos(valor_usd: float, cotacao: float, frete: float,
                    aliquota_ii: float, aliquota_ipi: float,
-                   aliquota_icms: float, despesas: float) -> dict:
+                   aliquota_icms: float, despesas: float,
+                   quantidade: int = 1) -> dict:
     """
-    Executa o calculo completo de todos os impostos em cascata.
+    Executa o cálculo completo de todos os impostos em cascata.
 
-    Os valores intermediarios circulam sem arredondamento para evitar
-    acumulo de erro. O arredondamento ocorre apenas no retorno final.
-    Os campos 'total_impostos' e 'custo_total' sao calculados a partir
-    dos valores nao arredondados, garantindo consistencia interna.
+    Frete e despesas são valores totais do lote e são rateados pela
+    quantidade antes do cálculo, garantindo que o custo unitário
+    reflita corretamente a participação de cada unidade nesses custos.
 
-    Nota sobre despesas: entram na base do ICMS e sao somadas ao
-    custo_total, mas nao compoe o total_impostos (nao sao tributos).
+    Os valores intermediários circulam sem arredondamento para evitar
+    acúmulo de erro. O arredondamento ocorre apenas no retorno final.
+    Os campos 'total_impostos' e 'custo_total' são valores unitários.
 
-    Parametros:
-        valor_usd    : valor do produto em dolares
-        cotacao      : cotacao do dolar em reais
-        frete        : frete internacional em reais
-        aliquota_ii  : aliquota do Imposto de Importacao (0 a 0.99)
-        aliquota_ipi : aliquota do IPI (0 a 0.99)
-        aliquota_icms: aliquota do ICMS do estado de destino (0 a 0.99)
-        despesas     : despesas aduaneiras em reais (SISCOMEX, despachante, etc.)
+    Nota sobre despesas: entram na base do ICMS e são somadas ao
+    custo_total, mas não compõem o total_impostos (não são tributos).
+
+    Parâmetros:
+        valor_usd    : valor do produto em dólares (por unidade)
+        cotacao      : cotação do dólar em reais
+        frete        : frete internacional total do lote em reais
+        aliquota_ii  : alíquota do Imposto de Importação (0 a 0.99)
+        aliquota_ipi : alíquota do IPI (0 a 0.99)
+        aliquota_icms: alíquota do ICMS do estado de destino (0 a 0.99)
+        despesas     : despesas aduaneiras totais do lote em reais
+        quantidade   : número de unidades do lote (default: 1)
 
     Retorna:
-        dict com as chaves:
+        dict com as chaves (todos valores unitários):
             valor_aduaneiro, ii, ipi, pis, cofins, icms,
-            despesas, total_impostos, custo_total
+            frete_unitario, despesas_unitario,
+            total_impostos, custo_total,
+            frete_lote, despesas_lote
 
-    Lanca:
-        TypeError : se algum parametro nao for numerico
-        ValueError: se algum parametro estiver fora do intervalo esperado
+    Lança:
+        TypeError : se algum parâmetro não for numérico
+        ValueError: se algum parâmetro estiver fora do intervalo esperado
     """
+    if not isinstance(quantidade, int) or quantidade < 1:
+        raise ValueError(f"'quantidade' deve ser um inteiro maior que zero, recebido: {quantidade}.")
+
     _validar_entradas(valor_usd, cotacao, frete, aliquota_ii, aliquota_ipi, aliquota_icms, despesas)
 
-    va     = calcular_valor_aduaneiro(valor_usd, cotacao, frete)
+    # Ratear frete e despesas do lote por unidade
+    frete_unit    = frete    / quantidade
+    despesas_unit = despesas / quantidade
+
+    va     = calcular_valor_aduaneiro(valor_usd, cotacao, frete_unit)
     ii     = calcular_ii(va, aliquota_ii)
     ipi    = calcular_ipi(va, ii, aliquota_ipi)
     pis    = calcular_pis(va)
     cofins = calcular_cofins(va)
-    icms   = calcular_icms(va, ii, ipi, pis, cofins, despesas, aliquota_icms)
+    icms   = calcular_icms(va, ii, ipi, pis, cofins, despesas_unit, aliquota_icms)
 
-    # despesas nao sao imposto — somam ao custo mas nao ao total_impostos
+    # Despesas não são imposto — somam ao custo mas não ao total_impostos
     total_impostos = ii + ipi + pis + cofins + icms
-    custo_total    = va + total_impostos + despesas
+    custo_total    = va + total_impostos + despesas_unit
 
     return {
-        "valor_aduaneiro" : round(va,             2),
-        "ii"              : round(ii,             2),
-        "ipi"             : round(ipi,            2),
-        "pis"             : round(pis,            2),
-        "cofins"          : round(cofins,         2),
-        "icms"            : round(icms,           2),
-        "despesas"        : round(despesas,       2),
-        "total_impostos"  : round(total_impostos, 2),
-        "custo_total"     : round(custo_total,    2),
+        "valor_aduaneiro"  : round(va,             2),
+        "ii"               : round(ii,             2),
+        "ipi"              : round(ipi,            2),
+        "pis"              : round(pis,            2),
+        "cofins"           : round(cofins,         2),
+        "icms"             : round(icms,           2),
+        "frete_unitario"   : round(frete_unit,     2),
+        "despesas_unitario": round(despesas_unit,  2),
+        "despesas"         : round(despesas_unit,  2),  # compatibilidade
+        "total_impostos"   : round(total_impostos, 2),
+        "custo_total"      : round(custo_total,    2),
+        "frete_lote"       : round(frete,          2),
+        "despesas_lote"    : round(despesas,       2),
     }

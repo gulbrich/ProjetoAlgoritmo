@@ -75,7 +75,7 @@ class JanelaPrincipal(tk.Tk):
 
         botoes = [
             ("Novo Cálculo",        "Calcula impostos e preço de venda\nde um produto importado",
-             self._abrir_calcular,  "📦"),
+             self._abrir_calcular,  "🖩"),
             ("Produtos Cadastrados","Lista, busca e remove\nprodutos já calculados",
              self._abrir_produtos,  "📋"),
             ("Gráficos",            "Visualiza composição de custos,\ncomparativos e análises",
@@ -145,7 +145,7 @@ class JanelaPrincipal(tk.Tk):
         rodape.pack_propagate(False)
 
         self._var_status = tk.StringVar(
-            value="Sistema pronto.  |  UFSCar Sorocaba — Engenharia de Produção"
+            value="Sistema de Precificação.  |  UFSCar Sorocaba — Engenharia de Produção"
         )
         tk.Label(rodape,
                  textvariable=self._var_status,

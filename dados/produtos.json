@@ -376,64 +376,6 @@
     }
   },
   {
-    "id": "008",
-    "data_cadastro": "2026-06-18 01:35:57",
-    "nome": "Smartphone",
-    "cotacao": 5.8,
-    "fonte_cotacao": "API",
-    "categoria": "8517.12.31",
-    "categoria_dados": {
-      "descricao": "Telefones",
-      "aliquota_ii": 0.16,
-      "aliquota_ipi": 0.15
-    },
-    "uf_origem": "SP",
-    "uf_destino": "SP",
-    "entrada": {
-      "nome": "Smartphone",
-      "categoria": "8517.12.31",
-      "categoria_dados": {
-        "descricao": "Telefones",
-        "aliquota_ii": 0.16,
-        "aliquota_ipi": 0.15
-      },
-      "uf_origem": "SP",
-      "uf_destino": "SP",
-      "valor_usd": 300.0,
-      "frete": 150.0,
-      "despesas": 50.0,
-      "quantidade": 10,
-      "margem": 0.35,
-      "cotacao": 5.8,
-      "fonte_cotacao": "API"
-    },
-    "impostos": {
-      "valor_aduaneiro": 1755.0,
-      "ii": 280.8,
-      "ipi": 305.37,
-      "pis": 36.86,
-      "cofins": 169.36,
-      "icms": 560.28,
-      "frete_unitario": 15.0,
-      "despesas_unitario": 5.0,
-      "despesas": 5.0,
-      "total_impostos": 1352.66,
-      "custo_total": 3112.66,
-      "frete_lote": 150.0,
-      "despesas_lote": 50.0
-    },
-    "precificacao": {
-      "custo_unitario": 3112.66,
-      "preco_venda": 4788.71,
-      "lucro_unitario": 1676.05,
-      "margem_percentual": 35.0,
-      "receita_total": 47887.08,
-      "custo_total_lote": 31126.6,
-      "lucro_total_lote": 16760.48,
-      "quantidade": 10
-    }
-  },
-  {
     "id": "009",
     "data_cadastro": "2026-06-18 01:35:57",
     "nome": "Perfume",
@@ -604,6 +546,64 @@
       "receita_total": 1466.67,
       "custo_total_lote": 1026.67,
       "lucro_total_lote": 440.0,
+      "quantidade": 1
+    }
+  },
+  {
+    "id": "011",
+    "data_cadastro": "2026-06-22 23:31:45",
+    "nome": "Teste2",
+    "cotacao": 5.1551,
+    "fonte_cotacao": "API",
+    "categoria": "8525.80.19",
+    "categoria_dados": {
+      "descricao": "Câmeras de vídeo digitais — filmadoras",
+      "aliquota_ii": 0.16,
+      "aliquota_ipi": 0.1
+    },
+    "uf_origem": "SP",
+    "uf_destino": "SP",
+    "entrada": {
+      "nome": "Teste2",
+      "categoria": "8525.80.19",
+      "categoria_dados": {
+        "descricao": "Câmeras de vídeo digitais — filmadoras",
+        "aliquota_ii": 0.16,
+        "aliquota_ipi": 0.1
+      },
+      "uf_origem": "SP",
+      "uf_destino": "SP",
+      "valor_usd": 100.0,
+      "frete": 0.0,
+      "despesas": 0.0,
+      "quantidade": 1,
+      "margem": 0.3,
+      "cotacao": 5.1551,
+      "fonte_cotacao": "API"
+    },
+    "impostos": {
+      "valor_aduaneiro": 515.51,
+      "ii": 82.48,
+      "ipi": 59.8,
+      "pis": 10.83,
+      "cofins": 49.75,
+      "icms": 157.69,
+      "frete_unitario": 0.0,
+      "despesas_unitario": 0.0,
+      "despesas": 0.0,
+      "total_impostos": 360.54,
+      "custo_total": 876.05,
+      "frete_lote": 0.0,
+      "despesas_lote": 0.0
+    },
+    "precificacao": {
+      "custo_unitario": 876.05,
+      "preco_venda": 1251.5,
+      "lucro_unitario": 375.45,
+      "margem_percentual": 30.0,
+      "receita_total": 1251.5,
+      "custo_total_lote": 876.05,
+      "lucro_total_lote": 375.45,
       "quantidade": 1
     }
   }

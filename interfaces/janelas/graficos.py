@@ -27,6 +27,32 @@ FONTE_SECAO  = ("Segoe UI", 10, "bold")
 
 
 
+def _produto_para_resultado(produto: dict) -> dict:
+    """
+    Converte um produto salvo no repositório para o formato de resultado
+    esperado pelo controller e pelos módulos de gráficos.
+
+    Garante que categoria_dados está presente na entrada para que
+    calcular_produto funcione corretamente ao recalcular para outros estados.
+    """
+    imp      = produto["impostos"]
+    categoria = _categoria_do_produto(produto)
+
+    # Copia a entrada e injeta categoria_dados para uso pelo controller
+    entrada = dict(produto["entrada"])
+    entrada["categoria_dados"] = categoria
+
+    return {
+        "entrada"      : entrada,
+        "cotacao"      : produto["cotacao"],
+        "fonte_cotacao": produto["fonte_cotacao"],
+        "categoria"    : categoria,
+        "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"] if imp.get("valor_aduaneiro") else 0,
+        "impostos"     : imp,
+        "precificacao" : produto["precificacao"],
+    }
+
+
 def _categoria_do_produto(produto: dict) -> dict:
     """
     Reconstrói o dicionário de categoria a partir de um produto salvo.
@@ -121,22 +147,25 @@ class JanelaGraficos(tk.Toplevel):
         self._frame_params = tk.Frame(self, bg=COR_CINZA)
         self._frame_params.pack(fill="x", padx=16, pady=(0, 8))
 
-        # Area do gráfico
+        # Rodapé fixo — empacotado ANTES do frame do gráfico
+        rodape = tk.Frame(self, bg=COR_CINZA)
+        rodape.pack(fill="x", padx=16, pady=(0, 12), side="bottom")
+        ttk.Button(rodape, text="Fechar",
+                   command=self.destroy).pack(side="right")
+        ttk.Button(rodape, text="Salvar imagem",
+                   command=self._salvar_imagem).pack(side="right", padx=8)
+
+        # Separador acima do rodapé
+        tk.Frame(self, bg=COR_AZUL_MED, height=1).pack(fill="x", side="bottom")
+
+        # Área do gráfico — ocupa o espaço restante
         self._frame_grafico = tk.Frame(self, bg=COR_BRANCO, relief="solid", bd=1)
-        self._frame_grafico.pack(fill="both", expand=True, padx=16, pady=(0, 8))
+        self._frame_grafico.pack(fill="both", expand=True, padx=16, pady=(0, 4))
 
         tk.Label(self._frame_grafico,
                  text="Selecione um tipo de gráfico e clique em Gerar.",
                  font=FONTE, bg=COR_BRANCO, fg="#888888"
                  ).pack(expand=True)
-
-        # Rodape
-        rodape = tk.Frame(self, bg=COR_CINZA)
-        rodape.pack(fill="x", padx=16, pady=(0, 12))
-        ttk.Button(rodape, text="Fechar",
-                   command=self.destroy).pack(side="right")
-        ttk.Button(rodape, text="Salvar imagem",
-                   command=self._salvar_imagem).pack(side="right", padx=8)
 
     # -----------------------------------------------------------------------
     # Painel de parametros dinâmico
@@ -271,17 +300,7 @@ class JanelaGraficos(tk.Toplevel):
         id_produto = sel.split(" — ")[0].strip()
         try:
             produto = consultar_por_id(id_produto)
-            imp = produto["impostos"]
-            resultado = {
-                "entrada"      : produto["entrada"],
-                "cotacao"      : produto["cotacao"],
-                "fonte_cotacao": produto["fonte_cotacao"],
-                "categoria"    : _categoria_do_produto(produto if "produto" in dir() else p),
-                "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"],
-                "impostos"     : imp,
-                "precificacao" : produto["precificacao"],
-            }
-            self._gerar_composicao_direta(resultado)
+            self._gerar_composicao_direta(_produto_para_resultado(produto))
         except Exception as e:
             messagebox.showerror("Erro", str(e), parent=self)
 
@@ -296,17 +315,7 @@ class JanelaGraficos(tk.Toplevel):
         try:
             resultados = []
             for i in indices:
-                p = produtos[i]
-                imp = p["impostos"]
-                resultados.append({
-                    "entrada"      : p["entrada"],
-                    "cotacao"      : p["cotacao"],
-                    "fonte_cotacao": p["fonte_cotacao"],
-                    "categoria"    : _categoria_do_produto(p),
-                    "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"],
-                    "impostos"     : imp,
-                    "precificacao" : p["precificacao"],
-                })
+                resultados.append(_produto_para_resultado(produtos[i]))
             self._limpar_grafico()
             fig, ax = plt.subplots(figsize=(max(6, len(resultados) * 2), 5))
             comparativo_produtos(resultados, _ax=ax)
@@ -316,7 +325,7 @@ class JanelaGraficos(tk.Toplevel):
             messagebox.showerror("Erro", str(e), parent=self)
 
     def _gerar_estados(self):
-        """Gera grafico comparativo por estado."""
+        """Gera gráfico comparativo por estado."""
         sel = self._var_prod_est.get()
         if not sel or "Nenhum" in sel:
             messagebox.showinfo("Aviso", "Selecione um produto.", parent=self)
@@ -329,16 +338,7 @@ class JanelaGraficos(tk.Toplevel):
         id_produto = sel.split(" — ")[0].strip()
         try:
             produto = consultar_por_id(id_produto)
-            imp = produto["impostos"]
-            resultado_base = {
-                "entrada"      : produto["entrada"],
-                "cotacao"      : produto["cotacao"],
-                "fonte_cotacao": produto["fonte_cotacao"],
-                "categoria"    : _categoria_do_produto(produto if "produto" in dir() else p),
-                "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"],
-                "impostos"     : imp,
-                "precificacao" : produto["precificacao"],
-            }
+            resultado_base = _produto_para_resultado(produto)
             self._limpar_grafico()
             fig, ax = plt.subplots(figsize=(max(6, len(estados) * 1.2), 5))
             comparativo_estados(resultado_base, estados, calcular_produto, _ax=ax)

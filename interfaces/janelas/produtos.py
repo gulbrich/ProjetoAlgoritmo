@@ -20,6 +20,29 @@ FONTE_SECAO  = ("Segoe UI", 10, "bold")
 
 
 
+def _produto_para_resultado(produto: dict) -> dict:
+    """
+    Converte um produto salvo no repositório para o formato de resultado
+    esperado pelos módulos de gráficos e pelo controller.
+
+    Garante que categoria_dados está presente na entrada.
+    """
+    imp      = produto["impostos"]
+    categoria = _categoria_do_produto(produto)
+    entrada  = dict(produto["entrada"])
+    entrada["categoria_dados"] = categoria
+
+    return {
+        "entrada"      : entrada,
+        "cotacao"      : produto["cotacao"],
+        "fonte_cotacao": produto["fonte_cotacao"],
+        "categoria"    : categoria,
+        "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"] if imp.get("valor_aduaneiro") else 0,
+        "impostos"     : imp,
+        "precificacao" : produto["precificacao"],
+    }
+
+
 def _categoria_do_produto(produto: dict) -> dict:
     """
     Reconstrói o dicionário de categoria a partir de um produto salvo.
@@ -324,15 +347,4 @@ class JanelaDetalhes(tk.Toplevel):
 
     def _abrir_grafico(self):
         from interfaces.janelas.graficos import JanelaGraficos
-        p   = self._produto
-        imp = p["impostos"]
-        resultado = {
-            "entrada"      : p["entrada"],
-            "cotacao"      : p["cotacao"],
-            "fonte_cotacao": p["fonte_cotacao"],
-            "categoria"    : _categoria_do_produto(p),
-            "aliquota_icms": imp["icms"] / imp["valor_aduaneiro"],
-            "impostos"     : imp,
-            "precificacao" : p["precificacao"],
-        }
-        JanelaGraficos(self, resultado_inicial=resultado)
+        JanelaGraficos(self, resultado_inicial=_produto_para_resultado(self._produto))
